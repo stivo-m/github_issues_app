@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:github_issues_app/constants/routes.dart';
 
 class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () => Navigator.pushNamed(context, DETAILS_SCREEN_ROUTE),
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 12.0),
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         width: MediaQuery.of(context).size.width,
         height: 200.0,
-        decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          boxShadow: [
-            BoxShadow(
-              color: Theme.of(context).canvasColor,
-              spreadRadius: 10.0,
-            )
-          ],
-        ),
+        color: Theme.of(context).scaffoldBackgroundColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
