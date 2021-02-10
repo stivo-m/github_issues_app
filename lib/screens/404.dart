@@ -9,9 +9,11 @@ class NotFoundScreen extends StatefulWidget {
 class _NotFoundScreenState extends State<NotFoundScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text(PAGE_NOT_FOUND),
+    return Material(
+      child: Container(
+        child: Center(
+          child: Text(PAGE_NOT_FOUND),
+        ),
       ),
     );
   }
