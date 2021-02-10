@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:github_issues_app/routes/router.dart';
 import 'package:github_issues_app/constants/constants.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -10,9 +11,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Github Issues Tracker',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        appBarTheme: AppBarTheme(
+          color: Colors.white,
+          iconTheme: IconThemeData(
+            color: Colors.black,
+          ),
+          textTheme: TextTheme(
+            headline1: TextStyle(color: Colors.black),
+          ),
+        ),
+        scaffoldBackgroundColor: Colors.grey[100],
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       onGenerateRoute: Router.generateRoute,

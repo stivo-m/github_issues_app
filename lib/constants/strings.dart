@@ -1,1 +1,9 @@
 const PAGE_NOT_FOUND = 'The requested page was not found.';
+const SPLASH_SCREEN_TITLE = 'Tracking GitHub Issues';
+const APP_TITLE = 'GitHub issues';
+const SEARCH_TEXT = 'Start typing...';
+const ISSUES_TEXT = 'Issues';
+const DATE_TEXT = 'Date';
+const FILTER_BY_TEXT = 'Filter By';
+const ANDROID_TEXT = 'Android';
+const IOS_TEXT = 'iOS';
