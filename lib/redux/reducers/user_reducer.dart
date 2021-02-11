@@ -5,12 +5,27 @@ import 'package:github_issues_app/constants/secret_keys.dart' as SecretKey;
 import 'package:url_launcher/url_launcher.dart';
 
 UserState userReducer(UserState state, action) {
+  if (action is UserCheckAuth) {
+    return state.copyWith(user: state.user, isLoading: true);
+  }
+
   if (action is UserLoginAction) {
     userLogin();
-    return state;
+    return state.copyWith(user: state.user, isLoading: true);
   }
+
+  if (action is UserLoginSuccess) {
+    return state.copyWith(
+      user: action.user,
+      isLoading: false,
+    );
+  }
+
   if (action is UserLogoutAction) {
-    return state;
+    return state.copyWith(
+      user: null,
+      isLoading: false,
+    );
   }
 
   return state;

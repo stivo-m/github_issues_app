@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:github_issues_app/constants/constants.dart';
+import 'package:github_issues_app/redux/actions/issues_actions.dart';
 import 'package:github_issues_app/redux/app_redux.dart';
 import 'package:redux/redux.dart';
 import 'widgets/widgets.dart';
@@ -14,9 +15,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: StoreConnector<AppState, ViewModel>(
-        converter: (Store<AppState> store) => ViewModel.create(store),
-        builder: (BuildContext context, ViewModel viewModel) => Material(
+      child: StoreBuilder<AppState>(
+        onInit: (store) => store.dispatch(GetIssues()),
+        builder: (BuildContext context, Store<AppState> store) => Material(
           child: CustomScrollView(
             slivers: [
               SliverAppBar(
@@ -70,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
-                    if (viewModel.issues.length == 0) {
+                    if (store.state.issues.length == 0) {
                       return Container(
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height - 250.0,
@@ -92,12 +93,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     }
 
                     return CustomCard(
-                      issue: viewModel.issues[index],
+                      issue: store.state.issues[index],
                     );
                   },
-                  childCount: viewModel.issues.length == 0
+                  childCount: store.state.issues.length == 0
                       ? 1
-                      : viewModel.issues.length,
+                      : store.state.issues.length,
                 ),
               ),
 

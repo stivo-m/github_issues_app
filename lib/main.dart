@@ -1,11 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:github_issues_app/redux/middleware/app_middleware.dart';
 // import our custom routing module
 import 'package:github_issues_app/routes/router.dart';
 // import the constants for strings and routes
 import 'package:github_issues_app/constants/constants.dart';
-// deep link service
-import 'package:github_issues_app/services/authentication/deep_link_service.dart';
 // import the redux and flutter_redux packagas installed through pubspec
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -26,23 +25,9 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
-  void initState() {
-    DeepLinkService.initDeepLinkListener();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    DeepLinkService.disposeDeepLinkListener();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final Store<AppState> store = Store<AppState>(
-      appStateReducer,
-      initialState: AppState.initialState(),
-    );
+    final Store<AppState> store = Store<AppState>(appStateReducer,
+        initialState: AppState.initialState(), middleware: appMiddleWare());
 
     return StoreProvider(
       store: store,

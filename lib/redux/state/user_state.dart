@@ -20,11 +20,10 @@ class UserState {
               )
             : null;
 
-  UserState copyWith({
-    @required User user,
-  }) {
+  UserState copyWith({@required User user, isLoading}) {
     return UserState(
       user: user ?? this.user,
+      isLoading: isLoading ?? this.isLoading,
     );
   }
 }
