@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:github_issues_app/constants/constants.dart';
 import 'package:github_issues_app/screens/screens.dart';
 
-class Router {
+class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case SPLASH_SCREEN_ROUTE:

@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:github_issues_app/constants/routes.dart';
+import 'package:github_issues_app/constants/constants.dart';
+import 'package:github_issues_app/models/models.dart';
 
 class CustomCard extends StatelessWidget {
+  final Issue issue;
+
+  const CustomCard({
+    Key key,
+    @required this.issue,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -20,7 +27,7 @@ class CustomCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "#13456465",
+                  issue?.id,
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -29,7 +36,7 @@ class CustomCard extends StatelessWidget {
                 ),
                 Chip(
                   label: Text(
-                    "OPEN",
+                    issue.closedAt,
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -44,7 +51,7 @@ class CustomCard extends StatelessWidget {
               height: 10.0,
             ),
             Text(
-              'Ive try to put a Column(a Container inside) in SliverAppBar bottom property as a button, but it cant overlap the ExtentList ,just overflow the bottom margin. I want to make it overlapped just like Spotify App do.',
+              issue.body,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
             ),
@@ -63,7 +70,7 @@ class CustomCard extends StatelessWidget {
                       size: 16,
                     ),
                     Text(
-                      "stivo-m",
+                      issue.user,
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w300,
@@ -80,7 +87,7 @@ class CustomCard extends StatelessWidget {
                       size: 16,
                     ),
                     Text(
-                      "32 seconds ago",
+                      issue.closedAt,
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w300,
@@ -97,7 +104,7 @@ class CustomCard extends StatelessWidget {
                       size: 16,
                     ),
                     Text(
-                      "22 comments",
+                      issue.comments.length.toString(),
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w300,

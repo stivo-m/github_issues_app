@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1056574195533",
+    "project_id": "github-issue-tracker-b7435",
+    "storage_bucket": "github-issue-tracker-b7435.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056574195533:android:16f80162c751bbf3859904",
+        "android_client_info": {
+          "package_name": "com.example.github_issues_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1056574195533-gs06ln2g450g6rb11q72kk8qnanskfhn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.github_issues_app",
+            "certificate_hash": "9791d6f24a75478c64abcfab1ffe59016c8063c5"
+          }
+        },
+        {
+          "client_id": "1056574195533-6u5l54bpojiea6k557o3p2utpr5a9eh3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOM90rb33IgYDuaYTpWSQOrClUbJ-eXNY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1056574195533-6u5l54bpojiea6k557o3p2utpr5a9eh3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
