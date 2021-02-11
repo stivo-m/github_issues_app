@@ -8,3 +8,5 @@ const DATE_TEXT = 'Date';
 const FILTER_BY_TEXT = 'Filter By';
 const ANDROID_TEXT = 'Android';
 const IOS_TEXT = 'iOS';
+const OPEN_TEXT = 'Open';
+const CLOSED_TEXT = 'Closed';

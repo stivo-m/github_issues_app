@@ -35,6 +35,8 @@ dependencies:
   dio: ^3.0.10
   # only for dev process
   redux_dev_tools: ^0.5.2
+  # flutter graphql client
+  graphql_flutter: ^4.0.1
 
 dev_dependencies:
   flutter_test:
