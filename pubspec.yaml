@@ -44,11 +44,14 @@ dependencies:
   # only for dev process
   redux_dev_tools: ^0.5.2
   # flutter graphql client
-  graphql_flutter: ^4.0.1
+  ferry: ^0.9.4
+  gql_http_link: ^0.3.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  ferry_generator:
+  build_runner:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

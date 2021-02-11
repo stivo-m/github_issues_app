@@ -1,20 +1,42 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 // import our custom routing module
 import 'package:github_issues_app/routes/router.dart';
 // import the constants for strings and routes
 import 'package:github_issues_app/constants/constants.dart';
+// deep link service
+import 'package:github_issues_app/services/authentication/deep_link_service.dart';
 // import the redux and flutter_redux packagas installed through pubspec
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 // importour app_redux folder
 import 'package:github_issues_app/redux/app_redux.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   // This widget is the root of your application.
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    DeepLinkService.initDeepLinkListener();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    DeepLinkService.disposeDeepLinkListener();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final Store<AppState> store = Store<AppState>(
@@ -41,8 +63,8 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.grey[100],
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        onGenerateRoute: Router.generateRoute,
-        initialRoute: HOME_SCREEN_ROUTE,
+        onGenerateRoute: AppRouter.generateRoute,
+        initialRoute: SPLASH_SCREEN_ROUTE,
       ),
     );
   }

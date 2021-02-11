@@ -11,6 +11,7 @@ const IOS_TEXT = 'iOS';
 const OPEN_TEXT = 'Open';
 const CLOSED_TEXT = 'Closed';
 const NO_ISSUES_FOUND = 'No issues found';
-
-const BASE_URL = "https://api.github.com/graphql";
-const PERSONAL_ACCESS_TOKEN = "";
+const URL_NOT_FOUND = 'Cannot launch this url!';
+const SIGN_IN_WITH_GITHUB_TEXT = 'Sign in with GitHub';
+// graphql endpoint
+const BASE_URL = 'https://api.github.com/graphql';
