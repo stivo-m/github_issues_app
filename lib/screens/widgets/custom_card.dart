@@ -36,7 +36,7 @@ class CustomCard extends StatelessWidget {
                 ),
                 Chip(
                   label: Text(
-                    issue.closedAt ? OPEN_TEXT : CLOSED_TEXT,
+                    issue.closedAt,
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -51,7 +51,7 @@ class CustomCard extends StatelessWidget {
               height: 10.0,
             ),
             Text(
-             issue.body,
+              issue.body,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
             ),
@@ -87,7 +87,7 @@ class CustomCard extends StatelessWidget {
                       size: 16,
                     ),
                     Text(
-                      issue.createdAt,
+                      issue.closedAt,
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w300,
@@ -104,7 +104,7 @@ class CustomCard extends StatelessWidget {
                       size: 16,
                     ),
                     Text(
-                     issue.comments.length.toString(),
+                      issue.comments.length.toString(),
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w300,

@@ -13,12 +13,10 @@ void main() {
   runApp(MyApp());
 }
 
-
-
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
-    Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     final Store<AppState> store = Store<AppState>(
       appStateReducer,
       initialState: AppState.initialState(),

@@ -10,3 +10,7 @@ const ANDROID_TEXT = 'Android';
 const IOS_TEXT = 'iOS';
 const OPEN_TEXT = 'Open';
 const CLOSED_TEXT = 'Closed';
+const NO_ISSUES_FOUND = 'No issues found';
+
+const BASE_URL = "https://api.github.com/graphql";
+const PERSONAL_ACCESS_TOKEN = "";

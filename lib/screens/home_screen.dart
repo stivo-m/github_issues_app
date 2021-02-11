@@ -37,8 +37,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     onPressed: () {},
                   )
                 ],
-                expandedHeight: 180.0,
-                collapsedHeight: 180.0,
+                expandedHeight: 200.0,
+                collapsedHeight: 200.0,
                 flexibleSpace: Container(
                   height: 180.0,
                   child: Column(
@@ -70,13 +70,48 @@ class _HomeScreenState extends State<HomeScreen> {
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
+                    if (viewModel.issues.length == 0) {
+                      return Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height - 250.0,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              NO_ISSUES_FOUND,
+                              style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+
                     return CustomCard(
                       issue: viewModel.issues[index],
                     );
                   },
-                  childCount: viewModel.issues.length,
+                  childCount: viewModel.issues.length == 0
+                      ? 1
+                      : viewModel.issues.length,
                 ),
               ),
+
+              // the circular progress notification is to be shown if the app is in loading state
+              // SliverList(
+              //   delegate: SliverChildBuilderDelegate(
+              //     (BuildContext context, int index) {
+              //       return Center(
+              //         child: CircularProgressIndicator(),
+              //       );
+              //     },
+              //     childCount: 1,
+              //   ),
+              // ),
             ],
           ),
         ),
