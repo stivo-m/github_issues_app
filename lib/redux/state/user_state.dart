@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:github_issues_app/models/models.dart';
-import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:github_issues_app/services/authentication/auth_service.dart';
 
 class UserState {
   final User user;
@@ -12,12 +12,8 @@ class UserState {
   });
 
   UserState.initialState(this.isLoading)
-      : user = auth.FirebaseAuth.instance.currentUser != null
-            ? User(
-                email: auth.FirebaseAuth.instance.currentUser.email,
-                name: auth.FirebaseAuth.instance.currentUser.displayName,
-                photoUrl: auth.FirebaseAuth.instance.currentUser.photoURL,
-              )
+      : user = authService.user != null
+            ? User.fromFirebase(authService.user)
             : null;
 
   UserState copyWith({@required User user, isLoading}) {

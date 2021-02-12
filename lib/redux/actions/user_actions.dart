@@ -12,3 +12,5 @@ class UserLoginSuccess {
 class UserLoginError {}
 
 class UserLogoutAction {}
+
+class UserLogoutSuccess {}

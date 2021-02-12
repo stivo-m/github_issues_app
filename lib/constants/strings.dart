@@ -13,6 +13,7 @@ const CLOSED_TEXT = 'Closed';
 const NO_ISSUES_FOUND = 'No issues found';
 const URL_NOT_FOUND = 'Cannot launch this url!';
 const SIGN_IN_WITH_GITHUB_TEXT = 'Sign in with GitHub';
+const SIGN_OUT_TEXT = 'Sign Out';
 const CONTINUE_TEXT = 'Continue';
 // graphql endpoint
 const BASE_URL = 'https://api.github.com/graphql';

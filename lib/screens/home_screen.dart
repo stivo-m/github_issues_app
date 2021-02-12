@@ -24,18 +24,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 pinned: true,
                 floating: false,
                 automaticallyImplyLeading: false,
-                title: Text(
-                  APP_TITLE,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 30,
+                title: Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    APP_TITLE,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 30,
+                    ),
                   ),
                 ),
                 centerTitle: false,
                 actions: [
                   IconButton(
                     icon: Icon(Icons.settings),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(SETTINGS_SCREEN_ROUTE);
+                    },
                   )
                 ],
                 expandedHeight: 200.0,
@@ -101,18 +106,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       : store.state.issues.length,
                 ),
               ),
-
-              // the circular progress notification is to be shown if the app is in loading state
-              // SliverList(
-              //   delegate: SliverChildBuilderDelegate(
-              //     (BuildContext context, int index) {
-              //       return Center(
-              //         child: CircularProgressIndicator(),
-              //       );
-              //     },
-              //     childCount: 1,
-              //   ),
-              // ),
             ],
           ),
         ),

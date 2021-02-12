@@ -12,6 +12,16 @@ class AppState {
   });
 
   AppState.initialState()
-      : issues = List.unmodifiable(<Issue>[]),
+      : issues = [
+          Issue(
+            body: "Test issue",
+            closedAt: "2 days ago",
+            id: "#46468",
+            title: "Title",
+            user: "User",
+            comments: [],
+            link: "",
+          )
+        ],
         userState = UserState.initialState(false);
 }

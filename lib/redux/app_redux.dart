@@ -1,2 +1,2 @@
-export 'reducers.dart';
-export 'app_state.dart';
+export 'reducers/reducers.dart';
+export 'state/app_state.dart';
