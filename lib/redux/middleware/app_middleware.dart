@@ -1,48 +1,26 @@
-import 'package:firebase_auth/firebase_auth.dart' as auth;
-import 'package:github_issues_app/constants/constants.dart';
-import 'package:github_issues_app/models/user_model.dart';
+import 'package:github_issues_app/redux/actions/issues_actions.dart';
 import 'package:github_issues_app/redux/actions/user_actions.dart';
 import 'package:github_issues_app/redux/state/app_state.dart';
-import 'package:github_issues_app/services/authentication/auth_service.dart';
-import 'package:github_issues_app/services/navigator_service.dart';
 import 'package:redux/redux.dart';
+import 'auth_middleware.module.dart';
+import 'issues_middleware.module.dart';
 
 List<Middleware<AppState>> appMiddleWare() {
-  final logout = _logOutUser();
-  final login = _loginUser();
-  final user = _checkAuth();
+  // auth middleware
+  final logout = logOutUser();
+  final login = loginUser();
+  final user = checkAuth();
+
+  // issues middleware
+  final issues = getIssues();
 
   return [
+    // auth middleware
     TypedMiddleware<AppState, UserLoginAction>(login),
     TypedMiddleware<AppState, UserLogoutAction>(logout),
     TypedMiddleware<AppState, UserCheckAuth>(user),
+
+    // issues middleware
+    TypedMiddleware<AppState, GetIssues>(issues),
   ];
-}
-
-Middleware<AppState> _loginUser() {
-  return (Store store, action, NextDispatcher next) async {
-    print("working..");
-    AuthService.initDeepLinkListener().then((auth.User user) {
-      store.dispatch(UserLoginSuccess(User.fromFirebase(user)));
-    }).catchError(
-      (e) => store.dispatch(UserLoginError()),
-    );
-    next(action);
-  };
-}
-
-Middleware<AppState> _checkAuth() {
-  return (Store store, action, NextDispatcher next) async {
-    next(action);
-  };
-}
-
-Middleware<AppState> _logOutUser() {
-  return (Store store, action, NextDispatcher next) async {
-    await authService.userLogOut();
-    store.dispatch(UserLogoutSuccess());
-    navigatorService.popAndNavigateTo(SPLASH_SCREEN_ROUTE);
-
-    next(action);
-  };
 }

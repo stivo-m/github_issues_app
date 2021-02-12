@@ -12,16 +12,6 @@ class AppState {
   });
 
   AppState.initialState()
-      : issues = [
-          Issue(
-            body: "Test issue",
-            closedAt: "2 days ago",
-            id: "#46468",
-            title: "Title",
-            user: "User",
-            comments: [],
-            link: "",
-          )
-        ],
+      : issues = [],
         userState = UserState.initialState(false);
 }

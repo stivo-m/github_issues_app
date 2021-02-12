@@ -8,6 +8,7 @@ import 'package:github_issues_app/models/models.dart';
 import 'package:github_issues_app/services/navigator_service.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
   final auth.FirebaseAuth _firebaseAuth = auth.FirebaseAuth.instance;
@@ -43,12 +44,13 @@ class AuthService {
     final auth.AuthCredential credential =
         auth.GithubAuthProvider.credential(loginResponse.accessToken);
 
-    // TODO: Save the access token from loginResponse.accessToken to _dio's default headers
+    // TODO: Save the access token from loginResponse.accessToken to _dio's shared preferences
+    final SharedPreferences _prefs = await SharedPreferences.getInstance();
+    _prefs.setString(TOKEN_TEXT, 'Bearer ${loginResponse.accessToken}');
 
     final auth.User user =
         (await _firebaseAuth.signInWithCredential(credential)).user;
     navigatorService.navigateTo(HOME_SCREEN_ROUTE);
-
     return user;
   }
 
