@@ -16,6 +16,7 @@ const SIGN_IN_WITH_GITHUB_TEXT = 'Sign in with GitHub';
 const SIGN_OUT_TEXT = 'Sign Out';
 const CONTINUE_TEXT = 'Continue';
 const TOKEN_TEXT = 'token';
+const API_AUTHORIZATION_TEXT = 'authorization';
 // graphql endpoint
 const API_ENDPOINT = 'https://api.github.com/graphql';
 

@@ -17,7 +17,7 @@ class IssuesService {
       API_ENDPOINT,
       client: client,
       defaultHeaders: {
-        'authorization': _prefs.getString(TOKEN_TEXT),
+        API_AUTHORIZATION_TEXT: _prefs.getString(TOKEN_TEXT),
       },
     );
 
