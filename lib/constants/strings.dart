@@ -16,7 +16,7 @@ const SIGN_IN_WITH_GITHUB_TEXT = 'Sign in with GitHub';
 const SIGN_OUT_TEXT = 'Sign Out';
 const CONTINUE_TEXT = 'Continue';
 // graphql endpoint
-const BASE_URL = 'https://api.github.com/graphql';
+const API_ENDPOINT = 'https://api.github.com/graphql';
 
 // ASSETS
 const GITHUB_IMAGE = "assets/images/github.png";
