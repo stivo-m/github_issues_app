@@ -33,10 +33,6 @@ class IssuesService {
         .toList();
 
     List<Issue> issues = Issue.issuesListFromJson(res);
-    //  Issue.fromJson(issue.data["viewer"]["issues"])
-    final data = res.map((issue) => issue.data["viewer"]["issues"]["nodes"][0]);
-    print(data);
-
     return issues;
   }
 }

@@ -7,7 +7,7 @@ import 'package:github_issues_app/redux/reducers/reducers.dart';
 import 'package:github_issues_app/routes/router.dart';
 // import the constants for strings and routes
 import 'package:github_issues_app/constants/constants.dart';
-import 'package:github_issues_app/services/navigator_service.dart';
+import 'package:github_issues_app/services/navigation/navigator_service.dart';
 // import the redux and flutter_redux packagas installed through pubspec
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
