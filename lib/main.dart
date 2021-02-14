@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:github_issues_app/redux/actions/issues_actions.dart';
 import 'package:github_issues_app/redux/middleware/app_middleware.dart';
 import 'package:github_issues_app/redux/reducers/reducers.dart';
 // import our custom routing module
@@ -12,10 +13,19 @@ import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 // importour app_redux folder
 import 'package:github_issues_app/redux/app_redux.dart';
+import 'package:github_issues_app/constants/secret_keys.dart' as SecretKey;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: FirebaseOptions(
+      apiKey: SecretKey.FIREBASE_API_KEY,
+      authDomain: SecretKey.AUTH_DOMAIN,
+      appId: SecretKey.FIREBASE_APP_ID,
+      projectId: SecretKey.FIREBASE_PROJECT_ID,
+      messagingSenderId: SecretKey.FIREBASE_MESSAGING_SENDER_ID,
+    ),
+  );
   runApp(MyApp());
 }
 
@@ -33,6 +43,8 @@ class _MyAppState extends State<MyApp> {
       initialState: AppState.initialState(),
       middleware: appMiddleWare(),
     );
+
+    store.dispatch(GetIssues());
 
     return StoreProvider(
       store: store,

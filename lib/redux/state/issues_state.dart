@@ -10,6 +10,10 @@ class IssuesState {
     @required this.loading,
   });
 
+  IssuesState.initialState()
+      : issues = [],
+        loading = false;
+
   IssuesState copyWith({
     @required List<Issue> issues,
     @required bool loading,

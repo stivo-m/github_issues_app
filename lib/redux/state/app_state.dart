@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:github_issues_app/models/models.dart';
+import 'package:github_issues_app/redux/state/issues_state.dart';
 import 'package:github_issues_app/redux/state/user_state.dart';
 
 class AppState {
-  final List<Issue> issues;
+  final IssuesState issuesState;
   final UserState userState;
 
   AppState({
-    @required this.issues,
+    @required this.issuesState,
     this.userState,
   });
 
   AppState.initialState()
-      : issues = [],
+      : issuesState = IssuesState.initialState(),
         userState = UserState.initialState(false);
 }

@@ -7,7 +7,7 @@ import 'package:redux/redux.dart';
 Middleware<AppState> getIssues() {
   return (Store store, action, NextDispatcher next) async {
     issuesService.getIssues().then((List<Issue> issues) {
-      store.dispatch(IssuesReceived());
+      store.dispatch(IssuesReceived(issues: issues));
     });
     next(action);
   };

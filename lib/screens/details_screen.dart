@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:github_issues_app/models/issue_model.dart';
 
-class DetailsScreen extends StatefulWidget {
-  @override
-  _DetailsScreenState createState() => _DetailsScreenState();
-}
+class DetailsScreen extends StatelessWidget {
+  final Issue issue;
 
-class _DetailsScreenState extends State<DetailsScreen> {
+  const DetailsScreen({
+    Key key,
+    @required this.issue,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -20,7 +22,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 onPressed: () => Navigator.pop(context),
               ),
               title: Text(
-                "#4545345",
+                "#" + issue.id,
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 30,
@@ -33,73 +35,76 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   onPressed: () {},
                 )
               ],
-              expandedHeight: 100.0,
-              collapsedHeight: 100.0,
+              expandedHeight: 110.0,
+              collapsedHeight: 110.0,
               flexibleSpace: Container(
-                height: 100.0,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    // bottom row
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.person,
-                              color: Colors.grey[500],
-                              size: 16,
-                            ),
-                            Text(
-                              "stivo-m",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w300,
-                                fontSize: 12,
+                height: 110.0,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // bottom row
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.person,
+                                color: Colors.grey[500],
+                                size: 16,
                               ),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.alarm,
-                              color: Colors.grey[500],
-                              size: 16,
-                            ),
-                            Text(
-                              "32 seconds ago",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w300,
-                                fontSize: 12,
+                              Text(
+                                issue.user,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 12,
+                                ),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.alarm,
+                                color: Colors.grey[500],
+                                size: 16,
                               ),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.message,
-                              color: Colors.grey[500],
-                              size: 16,
-                            ),
-                            Text(
-                              "22 comments",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w300,
-                                fontSize: 12,
+                              Text(
+                                issue.createdAt,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 12,
+                                ),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.message,
+                                color: Colors.grey[500],
+                                size: 16,
                               ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
+                              Text(
+                                issue.comments.length.toString() + " comments",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 12,
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -127,7 +132,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           height: 10.0,
                         ),
                         Text(
-                          'Ive try to put a Column(a Container inside) in SliverAppBar bottom property as a button, but it cant overlap the ExtentList ,just overflow the bottom margin. I want to make it overlapped just like Spotify App do.',
+                          issue.body,
                         ),
                         SizedBox(
                           height: 20.0,
@@ -141,15 +146,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         ),
                         SizedBox(
                           height: 10.0,
-                        ),
-                        Text(
-                          'Ive try to put a Column(a Container inside) in SliverAppBar bottom property as a button, but it cant ',
-                        ),
-                        Text(
-                          'Ive try to put a Column(a Container inside) in SliverAppBar bottom property as a button, but it cant ',
-                        ),
-                        Text(
-                          'Ive try to put a Column(a Container inside) in SliverAppBar bottom property as a button, but it cant ',
                         ),
                       ],
                     ),

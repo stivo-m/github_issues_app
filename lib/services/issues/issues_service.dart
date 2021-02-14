@@ -10,26 +10,34 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class IssuesService {
   dio.Dio client = dio.Dio();
+  SharedPreferences _prefs;
+  Link _link;
 
-  Future<List<Issue>> getIssues() async {
-    final SharedPreferences _prefs = await SharedPreferences.getInstance();
-    Link link = DioLink(
+  Future init() async {
+    _prefs = await SharedPreferences.getInstance();
+    _link = DioLink(
       API_ENDPOINT,
       client: client,
       defaultHeaders: {
         API_AUTHORIZATION_TEXT: _prefs.getString(TOKEN_TEXT),
       },
     );
+  }
 
-    final res = await link
+  Future<List<Issue>> getIssues() async {
+    await init();
+    final res = await _link
         .request(Request(
           operation: Operation(document: gqlLang.parseString(query)),
         ))
-        .first;
+        .toList();
 
-    print(res.data);
+    List<Issue> issues = Issue.issuesListFromJson(res);
+    //  Issue.fromJson(issue.data["viewer"]["issues"])
+    final data = res.map((issue) => issue.data["viewer"]["issues"]["nodes"][0]);
+    print(data);
 
-    return [];
+    return issues;
   }
 }
 
