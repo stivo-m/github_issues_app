@@ -1,40 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:github_issues_app/constants/constants.dart';
+import 'package:github_issues_app/redux/actions/issues_actions.dart';
 import 'package:github_issues_app/redux/app_redux.dart';
 import 'package:redux/redux.dart';
 import 'widgets/widgets.dart';
 
-class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: StoreConnector<AppState, ViewModel>(
-        converter: (Store<AppState> store) => ViewModel.create(store),
-        builder: (BuildContext context, ViewModel viewModel) => Material(
-          child: CustomScrollView(
+      child: Material(
+        child: StoreBuilder<AppState>(
+          onInit: (store) => store.dispatch(GetIssues()),
+          builder: (BuildContext context, Store<AppState> store) =>
+              CustomScrollView(
             slivers: [
               SliverAppBar(
                 pinned: true,
                 floating: false,
                 automaticallyImplyLeading: false,
-                title: Text(
-                  APP_TITLE,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 30,
+                title: Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    APP_TITLE,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 30,
+                    ),
                   ),
                 ),
                 centerTitle: false,
                 actions: [
                   IconButton(
                     icon: Icon(Icons.settings),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(
+                        SETTINGS_SCREEN_ROUTE,
+                      );
+                    },
                   )
                 ],
                 expandedHeight: 200.0,
@@ -70,7 +74,23 @@ class _HomeScreenState extends State<HomeScreen> {
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
-                    if (viewModel.issues.length == 0) {
+                    if (store.state.issuesState.loading) {
+                      return Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height - 250.0,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CircularProgressIndicator(),
+                          ],
+                        ),
+                      );
+                    }
+
+                    if (!store.state.issuesState.loading &&
+                        store.state.issuesState.issues.length == 0) {
                       return Container(
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height - 250.0,
@@ -92,26 +112,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     }
 
                     return CustomCard(
-                      issue: viewModel.issues[index],
+                      issue: store.state.issuesState.issues[index],
                     );
                   },
-                  childCount: viewModel.issues.length == 0
+                  childCount: store.state.issuesState.issues.length == 0
                       ? 1
-                      : viewModel.issues.length,
+                      : store.state.issuesState.issues.length,
                 ),
               ),
-
-              // the circular progress notification is to be shown if the app is in loading state
-              // SliverList(
-              //   delegate: SliverChildBuilderDelegate(
-              //     (BuildContext context, int index) {
-              //       return Center(
-              //         child: CircularProgressIndicator(),
-              //       );
-              //     },
-              //     childCount: 1,
-              //   ),
-              // ),
             ],
           ),
         ),

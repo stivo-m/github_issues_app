@@ -10,7 +10,12 @@ class AppRouter {
       case HOME_SCREEN_ROUTE:
         return MaterialPageRoute(builder: (_) => HomeScreen());
       case DETAILS_SCREEN_ROUTE:
-        return MaterialPageRoute(builder: (_) => DetailsScreen());
+        return MaterialPageRoute(
+            builder: (_) => DetailsScreen(
+                  issue: settings.arguments,
+                ));
+      case SETTINGS_SCREEN_ROUTE:
+        return MaterialPageRoute(builder: (_) => SettingsScreen());
       default:
         return MaterialPageRoute(builder: (_) => NotFoundScreen());
     }

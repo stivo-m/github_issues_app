@@ -4,7 +4,6 @@ import 'package:github_issues_app/models/models.dart';
 
 class CustomCard extends StatelessWidget {
   final Issue issue;
-
   const CustomCard({
     Key key,
     @required this.issue,
@@ -12,7 +11,11 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, DETAILS_SCREEN_ROUTE),
+      onTap: () => Navigator.pushNamed(
+        context,
+        DETAILS_SCREEN_ROUTE,
+        arguments: issue,
+      ),
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 12.0),
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -27,7 +30,7 @@ class CustomCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  issue?.id,
+                  "#" + issue.id,
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -36,14 +39,16 @@ class CustomCard extends StatelessWidget {
                 ),
                 Chip(
                   label: Text(
-                    issue.closedAt,
+                    issue.closed ? CLOSED_TEXT : OPEN_TEXT,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: issue.closed ? Colors.black : Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
                     ),
                   ),
-                  backgroundColor: Colors.orange[800],
+                  backgroundColor: issue.closed
+                      ? Colors.greenAccent[400]
+                      : Colors.orange[800],
                 )
               ],
             ),
@@ -87,7 +92,7 @@ class CustomCard extends StatelessWidget {
                       size: 16,
                     ),
                     Text(
-                      issue.closedAt,
+                      issue.createdAt,
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w300,
@@ -103,8 +108,11 @@ class CustomCard extends StatelessWidget {
                       color: Colors.grey[500],
                       size: 16,
                     ),
+                    SizedBox(
+                      width: 5,
+                    ),
                     Text(
-                      issue.comments.length.toString(),
+                      issue.comments.length.toString() + " comments",
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w300,
