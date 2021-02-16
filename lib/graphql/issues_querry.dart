@@ -23,6 +23,10 @@ const query = """
             description
           }
         }
+        repository {
+          id
+          name
+        }
         title
         body
         comments(first: 100) {

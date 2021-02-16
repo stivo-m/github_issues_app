@@ -41,13 +41,30 @@ class DetailsScreen extends StatelessWidget {
               expandedHeight: 110.0,
               collapsedHeight: 110.0,
               flexibleSpace: Container(
-                height: 110.0,
+                height: 150.0,
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 20.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      Text(
+                        issue.title,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        "Repo: " + issue.repo,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                      ),
+
                       // bottom row
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,

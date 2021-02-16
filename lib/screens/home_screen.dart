@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:github_issues_app/constants/constants.dart';
 import 'package:github_issues_app/redux/actions/issues_actions.dart';
@@ -10,48 +11,77 @@ import 'widgets/widgets.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Material(
-        child: StoreBuilder<AppState>(
-          onInit: (store) => store.dispatch(GetIssues()),
-          builder: (BuildContext context, Store<AppState> store) =>
-              RefreshIndicator(
-            onRefresh: () => store.dispatch(GetIssues()),
-            child: CustomScrollView(
-              slivers: [
-                SliverAppBar(
-                  pinned: true,
-                  floating: false,
-                  automaticallyImplyLeading: false,
-                  title: Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Text(
-                      APP_TITLE,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
-                  centerTitle: false,
-                  actions: [
-                    IconButton(
-                      icon: Icon(Icons.settings),
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(
-                          SETTINGS_SCREEN_ROUTE,
-                        );
-                      },
-                    )
-                  ],
-                  expandedHeight: 200.0,
-                  collapsedHeight: 200.0,
-                  flexibleSpace: _flexibleSpace(store),
+    Future<bool> _onWillPop() async {
+      return (await showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: new Text('Are you sure?'),
+              content: new Text('Do you want to exit an App'),
+              actions: <Widget>[
+                new FlatButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: new Text('No'),
                 ),
-                SliverList(
-                  delegate: _sliverListDelegate(context, store),
+                new FlatButton(
+                  onPressed: () {
+                    Future.delayed(const Duration(milliseconds: 1000), () {
+                      SystemChannels.platform
+                          .invokeMethod('SystemNavigator.pop');
+                    });
+                  },
+                  child: new Text('Yes'),
                 ),
               ],
+            ),
+          )) ??
+          false;
+    }
+
+    return SafeArea(
+      child: Material(
+        child: WillPopScope(
+          onWillPop: _onWillPop,
+          child: StoreBuilder<AppState>(
+            onInit: (store) => store.dispatch(GetIssues()),
+            builder: (BuildContext context, Store<AppState> store) =>
+                RefreshIndicator(
+              onRefresh: () => store.dispatch(GetIssues()),
+              child: CustomScrollView(
+                slivers: [
+                  SliverAppBar(
+                    pinned: true,
+                    floating: false,
+                    automaticallyImplyLeading: false,
+                    title: Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Text(
+                        APP_TITLE,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 30,
+                        ),
+                      ),
+                    ),
+                    centerTitle: false,
+                    actions: [
+                      IconButton(
+                        icon: Icon(Icons.settings),
+                        onPressed: () {
+                          Navigator.of(context).pushNamed(
+                            SETTINGS_SCREEN_ROUTE,
+                          );
+                        },
+                      )
+                    ],
+                    expandedHeight: 200.0,
+                    collapsedHeight: 200.0,
+                    flexibleSpace: _flexibleSpace(store),
+                  ),
+                  SliverList(
+                    delegate: _sliverListDelegate(context, store),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

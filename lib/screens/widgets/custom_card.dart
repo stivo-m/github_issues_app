@@ -21,7 +21,7 @@ class CustomCard extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 12.0),
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
         width: MediaQuery.of(context).size.width,
-        height: 210.0,
+        height: 240.0,
         color: Theme.of(context).scaffoldBackgroundColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -64,6 +64,17 @@ class CustomCard extends StatelessWidget {
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
+              ),
+            ),
+            SizedBox(
+              height: 5.0,
+            ),
+            Text(
+              "Repo: " + issue.repo,
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
               ),
             ),
             SizedBox(
