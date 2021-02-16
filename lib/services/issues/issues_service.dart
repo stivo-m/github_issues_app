@@ -31,8 +31,14 @@ class IssuesService {
           operation: Operation(document: gqlLang.parseString(query)),
         ))
         .toList();
-
-    List<Issue> issues = Issue.issuesListFromJson(res);
+    List<Issue> issues = [];
+    res.forEach((d) {
+      var data = d.data["viewer"]["issues"]["nodes"] as List;
+      data.forEach((iss) {
+        var comments = iss["comments"]["nodes"] as List;
+        issues.add(Issue.fromJson(iss, comments));
+      });
+    });
     return issues;
   }
 }

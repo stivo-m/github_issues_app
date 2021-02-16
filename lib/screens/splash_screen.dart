@@ -5,12 +5,7 @@ import 'package:github_issues_app/redux/actions/user_actions.dart';
 import 'package:github_issues_app/redux/app_redux.dart';
 import 'package:redux/redux.dart';
 
-class SplashScreen extends StatefulWidget {
-  @override
-  _SplashScreenState createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
+class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -22,13 +17,13 @@ class _SplashScreenState extends State<SplashScreen> {
               child: CircularProgressIndicator(),
             );
           }
-          return _buildBody(store);
+          return _buildBody(context, store);
         },
       ),
     );
   }
 
-  _buildBody(Store<AppState> store) {
+  _buildBody(BuildContext context, Store<AppState> store) {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,

@@ -17,21 +17,13 @@ class Issue {
     this.comments,
   });
 
-  Issue.fromJson(Map<String, dynamic> map)
-      : this.title = map["nodes"][0]['title'],
-        this.body = map["nodes"][0]['body'],
-        this.user = map['nodes'][0]['author']['login'],
-        this.id = map["nodes"][0]['databaseId'].toString(),
-        this.closedAt = map['nodes'][0]['closedAt'],
-        this.createdAt = map['nodes'][0]['createdAt'],
-        this.closed = map['nodes'][0]['closed'],
-        this.comments = map['comments'] as List ?? [];
-
-  static List<Issue> issuesListFromJson(List<dynamic> json) {
-    return json == null
-        ? List<Issue>()
-        : json
-            .map((value) => Issue.fromJson(value.data["viewer"]["issues"]))
-            .toList();
-  }
+  Issue.fromJson(Map<String, dynamic> map, List<dynamic> commentsJson)
+      : this.title = map['title'],
+        this.body = map['body'],
+        this.user = map['author']['login'],
+        this.id = map['databaseId'].toString(),
+        this.closedAt = map['closedAt'],
+        this.createdAt = map['createdAt'],
+        this.closed = map['closed'],
+        this.comments = Comment.comments(commentsJson);
 }

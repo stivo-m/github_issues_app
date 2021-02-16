@@ -1,5 +1,7 @@
 import 'package:github_issues_app/redux/actions/issues_actions.dart';
+import 'package:github_issues_app/redux/actions/search_actions.dart';
 import 'package:github_issues_app/redux/actions/user_actions.dart';
+import 'package:github_issues_app/redux/middleware/search_middleware.dart';
 import 'package:github_issues_app/redux/state/app_state.dart';
 import 'package:redux/redux.dart';
 import 'auth_middleware.module.dart';
@@ -13,6 +15,8 @@ List<Middleware<AppState>> appMiddleWare() {
 
   // issues middleware
   final issues = getIssues();
+  // search middleware
+  final search = searchIssue();
 
   return [
     // auth middleware
@@ -22,5 +26,7 @@ List<Middleware<AppState>> appMiddleWare() {
 
     // issues middleware
     TypedMiddleware<AppState, GetIssues>(issues),
+    // issues middleware
+    TypedMiddleware<AppState, SearchTerm>(search),
   ];
 }
