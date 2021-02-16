@@ -55,6 +55,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         navigatorKey: navigatorService.navigatorKey,
         theme: ThemeData(
+          fontFamily: 'Roboto',
           primarySwatch: Colors.blue,
           appBarTheme: AppBarTheme(
             color: Colors.white,

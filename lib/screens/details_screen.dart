@@ -24,11 +24,14 @@ class DetailsScreen extends StatelessWidget {
                 icon: Icon(Icons.arrow_back_ios),
                 onPressed: () => Navigator.pop(context),
               ),
-              title: Text(
-                "#" + issue.id,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 30,
+              title: Hero(
+                tag: issue.id.hashCode,
+                child: Text(
+                  "#" + issue.id,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 30,
+                  ),
                 ),
               ),
               centerTitle: true,
