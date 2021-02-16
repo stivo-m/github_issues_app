@@ -15,6 +15,7 @@ const URL_NOT_FOUND = 'Cannot launch this url!';
 const SIGN_IN_WITH_GITHUB_TEXT = 'Sign in with GitHub';
 const SIGN_OUT_TEXT = 'Sign Out';
 const CONTINUE_TEXT = 'Continue';
+const COMMENTS_TEXT = 'Comments';
 const TOKEN_TEXT = 'token';
 const API_AUTHORIZATION_TEXT = 'authorization';
 // graphql endpoint
@@ -22,3 +23,8 @@ const API_ENDPOINT = 'https://api.github.com/graphql';
 
 // ASSETS
 const GITHUB_IMAGE = "assets/images/github.png";
+
+// DROPDOWN FIELDS
+const String TITLE_ID = "Title";
+const String DATE_ID = "Created at";
+const String ID = "Id";

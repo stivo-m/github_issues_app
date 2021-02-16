@@ -5,7 +5,7 @@ import 'package:github_issues_app/constants/secret_keys.dart' as SecretKey;
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'dart:convert';
 import 'package:github_issues_app/models/models.dart';
-import 'package:github_issues_app/services/navigator_service.dart';
+import 'package:github_issues_app/services/navigation/navigator_service.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -67,7 +67,9 @@ class AuthService {
   }
 
   Future userLogOut() async {
-    await _firebaseAuth.signOut();
+    final SharedPreferences _prefs = await SharedPreferences.getInstance();
+    _prefs.remove(TOKEN_TEXT);
+    return await _firebaseAuth.signOut();
   }
 
   // deep link listener services

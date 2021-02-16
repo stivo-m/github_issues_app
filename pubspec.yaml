@@ -47,6 +47,8 @@ dependencies:
   gql_dio_link: ^0.0.4
   # shared preferences
   shared_preferences: ^0.5.12+4
+  # get elapsed time
+  time_ago_provider: ^3.2.0
 
 dev_dependencies:
   flutter_test:

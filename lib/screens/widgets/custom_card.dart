@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:github_issues_app/constants/constants.dart';
 import 'package:github_issues_app/models/models.dart';
+import 'package:time_ago_provider/time_ago_provider.dart' as time_ago;
 
 class CustomCard extends StatelessWidget {
   final Issue issue;
@@ -18,9 +19,9 @@ class CustomCard extends StatelessWidget {
       ),
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 12.0),
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
         width: MediaQuery.of(context).size.width,
-        height: 200.0,
+        height: 210.0,
         color: Theme.of(context).scaffoldBackgroundColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -39,7 +40,9 @@ class CustomCard extends StatelessWidget {
                 ),
                 Chip(
                   label: Text(
-                    issue.closed ? CLOSED_TEXT : OPEN_TEXT,
+                    issue.closed
+                        ? CLOSED_TEXT.toUpperCase()
+                        : OPEN_TEXT.toUpperCase(),
                     style: TextStyle(
                       color: issue.closed ? Colors.black : Colors.white,
                       fontWeight: FontWeight.bold,
@@ -54,6 +57,17 @@ class CustomCard extends StatelessWidget {
             ),
             SizedBox(
               height: 10.0,
+            ),
+            Text(
+              issue.title,
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+            SizedBox(
+              height: 20.0,
             ),
             Text(
               issue.body,
@@ -92,7 +106,9 @@ class CustomCard extends StatelessWidget {
                       size: 16,
                     ),
                     Text(
-                      issue.createdAt,
+                      time_ago.format(
+                        DateTime.parse(issue.createdAt),
+                      ),
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w300,
@@ -122,7 +138,7 @@ class CustomCard extends StatelessWidget {
                   ],
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

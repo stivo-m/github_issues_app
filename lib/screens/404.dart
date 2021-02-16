@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:github_issues_app/constants/constants.dart';
 
-class NotFoundScreen extends StatefulWidget {
-  @override
-  _NotFoundScreenState createState() => _NotFoundScreenState();
-}
-
-class _NotFoundScreenState extends State<NotFoundScreen> {
+class NotFoundScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(

@@ -31,6 +31,20 @@ class SettingsScreen extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          width: MediaQuery.of(context).size.width,
+          height: 100,
+          child: Row(
+            children: [
+              IconButton(
+                icon: Icon(Icons.arrow_back_ios),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+              Text("Back"),
+            ],
+          ),
+        ),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -64,15 +78,15 @@ class SettingsScreen extends StatelessWidget {
             SizedBox(
               height: 30.0,
             ),
-            MaterialButton(
-              color: Colors.redAccent,
-              minWidth: MediaQuery.of(context).size.width * 0.8,
-              onPressed: () => store.dispatch(UserLogoutAction()),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 15.0),
-                child: store.state.userState.isLoading
-                    ? CircularProgressIndicator()
-                    : Text(
+            store.state.userState.isLoading
+                ? CircularProgressIndicator()
+                : MaterialButton(
+                    color: Colors.redAccent,
+                    minWidth: MediaQuery.of(context).size.width * 0.8,
+                    onPressed: () => store.dispatch(UserLogoutAction()),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 15.0),
+                      child: Text(
                         SIGN_OUT_TEXT.toUpperCase(),
                         style: TextStyle(
                           color: Colors.white,
@@ -80,8 +94,8 @@ class SettingsScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-              ),
-            ),
+                    ),
+                  ),
           ],
         )
       ],

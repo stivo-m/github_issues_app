@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:github_issues_app/constants/constants.dart';
+import 'package:github_issues_app/models/comments_model.dart';
 import 'package:github_issues_app/models/issue_model.dart';
+import 'package:time_ago_provider/time_ago_provider.dart' as time_ago;
 
 class DetailsScreen extends StatelessWidget {
   final Issue issue;
@@ -75,7 +78,9 @@ class DetailsScreen extends StatelessWidget {
                                 size: 16,
                               ),
                               Text(
-                                issue.createdAt,
+                                time_ago.format(
+                                  DateTime.parse(issue.createdAt),
+                                ),
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w300,
@@ -122,7 +127,7 @@ class DetailsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Issues',
+                          ISSUES_TEXT,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
@@ -138,7 +143,7 @@ class DetailsScreen extends StatelessWidget {
                           height: 20.0,
                         ),
                         Text(
-                          'Comments',
+                          COMMENTS_TEXT,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
@@ -147,6 +152,23 @@ class DetailsScreen extends StatelessWidget {
                         SizedBox(
                           height: 10.0,
                         ),
+                        Expanded(
+                          flex: 1,
+                          child: ListView.builder(
+                            itemCount: issue.comments.length,
+                            itemBuilder: (context, index) {
+                              Comment comment = issue.comments[index];
+                              return ListTile(
+                                leading: Icon(Icons.comment_rounded),
+                                title: Text(comment.comment),
+                                subtitle: Text(time_ago.format(
+                                  DateTime.parse(comment.createdAt),
+                                )),
+                                trailing: Text(comment.user),
+                              );
+                            },
+                          ),
+                        )
                       ],
                     ),
                   );

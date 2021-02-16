@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Comment {
   final String createdAt, user;
-  final Text comment;
+  final String comment;
 
   Comment({
     @required this.createdAt,
@@ -10,8 +10,18 @@ class Comment {
     @required this.comment,
   });
 
-  Comment.fromJson(Map<String, dynamic> json)
-      : this.createdAt = json['created_at'],
-        this.comment = json['comment'],
-        this.user = json['user'];
+  Comment.fromJson(json)
+      : this.createdAt = json['publishedAt'],
+        this.comment = json['body'],
+        this.user = json['author']["login"];
+
+  static List<Comment> comments(List<dynamic> comments) {
+    List<Comment> cmnts = [];
+
+    comments.forEach((c) {
+      cmnts.add(Comment.fromJson(c));
+    });
+
+    return cmnts;
+  }
 }
