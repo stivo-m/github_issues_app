@@ -34,8 +34,10 @@ class SettingsScreen extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           width: MediaQuery.of(context).size.width,
-          height: 100,
+          height: 50,
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               IconButton(
                 icon: Icon(Icons.arrow_back_ios),

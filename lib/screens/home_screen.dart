@@ -134,6 +134,10 @@ class HomeScreen extends StatelessWidget {
                     value: DATE_ID,
                     child: Text(DATE_ID.toString()),
                   ),
+                  DropdownMenuItem(
+                    value: REPO_ID,
+                    child: Text(REPO_ID.toString()),
+                  ),
                 ],
               ),
               Text(IOS_TEXT),
