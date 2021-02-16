@@ -18,3 +18,9 @@ class SearchNotFound {
 }
 
 class SearchClosed {}
+
+class SortBy {
+  final String field;
+
+  SortBy({this.field});
+}

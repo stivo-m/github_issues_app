@@ -23,3 +23,8 @@ const API_ENDPOINT = 'https://api.github.com/graphql';
 
 // ASSETS
 const GITHUB_IMAGE = "assets/images/github.png";
+
+// DROPDOWN FIELDS
+const String TITLE_ID = "Title";
+const String DATE_ID = "Created at";
+const String ID = "Id";

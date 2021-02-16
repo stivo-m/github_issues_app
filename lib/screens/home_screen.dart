@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:github_issues_app/constants/constants.dart';
 import 'package:github_issues_app/redux/actions/issues_actions.dart';
+import 'package:github_issues_app/redux/actions/search_actions.dart';
 import 'package:github_issues_app/redux/app_redux.dart';
 import 'package:redux/redux.dart';
 import 'widgets/widgets.dart';
@@ -73,28 +74,31 @@ class HomeScreen extends StatelessWidget {
 
           // bottom row
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(DATE_TEXT),
               DropdownButton(
-                onChanged: (selected) {},
-                value: "ID",
+                onChanged: (selected) {
+                  store.dispatch(SortBy(field: selected));
+                },
+                value: "null",
                 items: [
                   DropdownMenuItem(
-                    value: "ID",
+                    value: "null",
                     onTap: () {},
-                    child: Text("Id"),
+                    child: Text("Filter by"),
                   ),
                   DropdownMenuItem(
-                    value: "Title",
-                    onTap: () {},
-                    child: Text("Title"),
+                    value: ID,
+                    child: Text(ID.toString()),
                   ),
                   DropdownMenuItem(
-                    value: COMMENTS_TEXT,
-                    onTap: () {},
-                    child: Text(COMMENTS_TEXT),
+                    value: TITLE_ID,
+                    child: Text(TITLE_ID.toString()),
+                  ),
+                  DropdownMenuItem(
+                    value: DATE_ID,
+                    child: Text(DATE_ID.toString()),
                   ),
                 ],
               ),

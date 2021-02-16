@@ -1,3 +1,4 @@
+import 'package:github_issues_app/constants/strings.dart';
 import 'package:github_issues_app/models/models.dart';
 
 class SearchService {
@@ -11,6 +12,23 @@ class SearchService {
       }
     }
     return foundIssues;
+  }
+
+  Future<List<Issue>> sortIssues(List<Issue> issues, String field) async {
+    switch (field) {
+      case TITLE_ID:
+        return issues.sortBy((issue) => issue.title);
+        break;
+      case DATE_ID:
+        return issues.sortBy((issue) => issue.createdAt);
+        break;
+      case ID:
+        return issues.sortBy((issue) => issue.id);
+        break;
+
+      default:
+        return issues;
+    }
   }
 }
 

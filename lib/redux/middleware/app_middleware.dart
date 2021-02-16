@@ -17,6 +17,7 @@ List<Middleware<AppState>> appMiddleWare() {
   final issues = getIssues();
   // search middleware
   final search = searchIssue();
+  final sortIssues = sortBy();
 
   return [
     // auth middleware
@@ -28,5 +29,6 @@ List<Middleware<AppState>> appMiddleWare() {
     TypedMiddleware<AppState, GetIssues>(issues),
     // issues middleware
     TypedMiddleware<AppState, SearchTerm>(search),
+    TypedMiddleware<AppState, SortBy>(sortIssues),
   ];
 }
