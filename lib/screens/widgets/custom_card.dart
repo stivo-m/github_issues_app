@@ -47,6 +47,7 @@ class CustomCard extends StatelessWidget {
               Hero(
                 tag: issue.comments.hashCode,
                 child: Material(
+                  color: Colors.transparent,
                   child: Chip(
                     label: Text(
                       issue.closed
