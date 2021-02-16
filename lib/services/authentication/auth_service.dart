@@ -67,7 +67,9 @@ class AuthService {
   }
 
   Future userLogOut() async {
-    await _firebaseAuth.signOut();
+    final SharedPreferences _prefs = await SharedPreferences.getInstance();
+    _prefs.remove(TOKEN_TEXT);
+    return await _firebaseAuth.signOut();
   }
 
   // deep link listener services

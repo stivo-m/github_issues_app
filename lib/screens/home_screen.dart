@@ -3,6 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:github_issues_app/constants/constants.dart';
 import 'package:github_issues_app/redux/actions/issues_actions.dart';
 import 'package:github_issues_app/redux/actions/search_actions.dart';
+import 'package:github_issues_app/redux/actions/user_actions.dart';
 import 'package:github_issues_app/redux/app_redux.dart';
 import 'package:redux/redux.dart';
 import 'widgets/widgets.dart';
@@ -13,7 +14,10 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       child: Material(
         child: StoreBuilder<AppState>(
-          onInit: (store) => store.dispatch(GetIssues()),
+          onInit: (store) {
+            store.dispatch(UserCheckAuth());
+            store.dispatch(GetIssues());
+          },
           builder: (BuildContext context, Store<AppState> store) =>
               CustomScrollView(
             slivers: [

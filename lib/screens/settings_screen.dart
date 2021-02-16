@@ -64,15 +64,15 @@ class SettingsScreen extends StatelessWidget {
             SizedBox(
               height: 30.0,
             ),
-            MaterialButton(
-              color: Colors.redAccent,
-              minWidth: MediaQuery.of(context).size.width * 0.8,
-              onPressed: () => store.dispatch(UserLogoutAction()),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 15.0),
-                child: store.state.userState.isLoading
-                    ? CircularProgressIndicator()
-                    : Text(
+            store.state.userState.isLoading
+                ? CircularProgressIndicator()
+                : MaterialButton(
+                    color: Colors.redAccent,
+                    minWidth: MediaQuery.of(context).size.width * 0.8,
+                    onPressed: () => store.dispatch(UserLogoutAction()),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 15.0),
+                      child: Text(
                         SIGN_OUT_TEXT.toUpperCase(),
                         style: TextStyle(
                           color: Colors.white,
@@ -80,8 +80,8 @@ class SettingsScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-              ),
-            ),
+                    ),
+                  ),
           ],
         )
       ],
