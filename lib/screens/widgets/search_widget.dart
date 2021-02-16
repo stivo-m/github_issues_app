@@ -11,6 +11,7 @@ class SearchWidget extends StatelessWidget {
   SearchWidget({Key key, this.store}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    _searchController.clear();
     return Container(
       width: MediaQuery.of(context).size.width * 0.9,
       decoration: BoxDecoration(
@@ -29,12 +30,16 @@ class SearchWidget extends StatelessWidget {
           );
         },
         controller: _searchController,
+        autofocus: false,
         decoration: InputDecoration(
           hintText: SEARCH_TEXT,
           prefixIcon: Icon(Icons.search),
           suffixIcon: IconButton(
             icon: Icon(Icons.close),
-            onPressed: () => store.dispatch(SearchClosed()),
+            onPressed: () {
+              _searchController.clear();
+              store.dispatch(SearchClosed());
+            },
           ),
           border: InputBorder.none,
         ),

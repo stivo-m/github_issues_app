@@ -1,7 +1,7 @@
 library secretkeys;
 
 const GITHUB_CLIENT_ID = "064d776864faba4db6c7";
-const GITHUB_CLIENT_SECRET = "1dab8ca59f10d50154546ffbbf8da5ffadbb657b";
+const GITHUB_CLIENT_SECRET = "24232a2113b3f631d57f14c8b10d710d40236f07";
 
 const AUTH_URL = "https://github.com/login/oauth/authorize" +
     "?client_id=" +

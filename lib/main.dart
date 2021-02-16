@@ -7,6 +7,7 @@ import 'package:github_issues_app/redux/reducers/reducers.dart';
 import 'package:github_issues_app/routes/router.dart';
 // import the constants for strings and routes
 import 'package:github_issues_app/constants/constants.dart';
+import 'package:github_issues_app/services/issues/issues_service.dart';
 import 'package:github_issues_app/services/navigation/navigator_service.dart';
 // import the redux and flutter_redux packagas installed through pubspec
 import 'package:redux/redux.dart';
@@ -44,6 +45,7 @@ class _MyAppState extends State<MyApp> {
       middleware: appMiddleWare(),
     );
 
+    issuesService.init();
     store.dispatch(GetIssues());
 
     return StoreProvider(
@@ -63,7 +65,7 @@ class _MyAppState extends State<MyApp> {
               headline1: TextStyle(color: Colors.black),
             ),
           ),
-          scaffoldBackgroundColor: Colors.grey[100],
+          scaffoldBackgroundColor: Colors.grey[200],
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         onGenerateRoute: AppRouter.generateRoute,

@@ -25,20 +25,23 @@ class IssuesService {
   }
 
   Future<List<Issue>> getIssues() async {
-    await init();
-    final res = await _link
-        .request(Request(
-          operation: Operation(document: gqlLang.parseString(query)),
-        ))
-        .toList();
     List<Issue> issues = [];
-    res.forEach((d) {
-      var data = d.data["viewer"]["issues"]["nodes"] as List;
-      data.forEach((iss) {
-        var comments = iss["comments"]["nodes"] as List;
-        issues.add(Issue.fromJson(iss, comments));
+
+    await init();
+    try {
+      final res = await _link
+          .request(Request(
+            operation: Operation(document: gqlLang.parseString(query)),
+          ))
+          .toList();
+      res.forEach((d) {
+        var data = d.data["viewer"]["issues"]["nodes"] as List;
+        data.forEach((iss) {
+          var comments = iss["comments"]["nodes"] as List;
+          issues.add(Issue.fromJson(iss, comments));
+        });
       });
-    });
+    } catch (e) {}
     return issues;
   }
 }

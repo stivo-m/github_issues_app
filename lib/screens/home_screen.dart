@@ -3,7 +3,6 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:github_issues_app/constants/constants.dart';
 import 'package:github_issues_app/redux/actions/issues_actions.dart';
 import 'package:github_issues_app/redux/actions/search_actions.dart';
-import 'package:github_issues_app/redux/actions/user_actions.dart';
 import 'package:github_issues_app/redux/app_redux.dart';
 import 'package:redux/redux.dart';
 import 'widgets/widgets.dart';
@@ -14,46 +13,46 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       child: Material(
         child: StoreBuilder<AppState>(
-          onInit: (store) {
-            store.dispatch(UserCheckAuth());
-            store.dispatch(GetIssues());
-          },
+          onInit: (store) => store.dispatch(GetIssues()),
           builder: (BuildContext context, Store<AppState> store) =>
-              CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                pinned: true,
-                floating: false,
-                automaticallyImplyLeading: false,
-                title: Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Text(
-                    APP_TITLE,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 30,
+              RefreshIndicator(
+            onRefresh: () => store.dispatch(GetIssues()),
+            child: CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  pinned: true,
+                  floating: false,
+                  automaticallyImplyLeading: false,
+                  title: Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Text(
+                      APP_TITLE,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 30,
+                      ),
                     ),
                   ),
+                  centerTitle: false,
+                  actions: [
+                    IconButton(
+                      icon: Icon(Icons.settings),
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(
+                          SETTINGS_SCREEN_ROUTE,
+                        );
+                      },
+                    )
+                  ],
+                  expandedHeight: 200.0,
+                  collapsedHeight: 200.0,
+                  flexibleSpace: _flexibleSpace(store),
                 ),
-                centerTitle: false,
-                actions: [
-                  IconButton(
-                    icon: Icon(Icons.settings),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(
-                        SETTINGS_SCREEN_ROUTE,
-                      );
-                    },
-                  )
-                ],
-                expandedHeight: 200.0,
-                collapsedHeight: 200.0,
-                flexibleSpace: _flexibleSpace(store),
-              ),
-              SliverList(
-                delegate: _sliverListDelegate(context, store),
-              ),
-            ],
+                SliverList(
+                  delegate: _sliverListDelegate(context, store),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -84,8 +83,9 @@ class HomeScreen extends StatelessWidget {
               DropdownButton(
                 onChanged: (selected) {
                   store.dispatch(SortBy(field: selected));
+                  print("Current sort " + store.state.searchState.sortBy);
                 },
-                value: "null",
+                value: store.state.searchState.sortBy,
                 items: [
                   DropdownMenuItem(
                     value: "null",

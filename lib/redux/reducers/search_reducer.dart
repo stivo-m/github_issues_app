@@ -34,5 +34,14 @@ SearchState searchReducer(SearchState state, action) {
     return newState;
   }
 
+  if (action is SortBy) {
+    SearchState newState = state.copyWith(
+      issues: state.issues,
+      searching: false,
+      sortBy: action.field,
+    );
+    return newState;
+  }
+
   return state;
 }

@@ -15,12 +15,17 @@ class SearchState {
   SearchState.initialState()
       : issues = [],
         searching = false,
-        this.sortBy = null;
+        this.sortBy = "null";
 
-  SearchState copyWith({@required searching, @required issues}) {
+  SearchState copyWith({
+    @required searching,
+    @required issues,
+    String sortBy,
+  }) {
     return SearchState(
       issues: issues ?? this.issues,
       searching: searching ?? this.searching,
+      sortBy: sortBy ?? this.sortBy,
     );
   }
 }

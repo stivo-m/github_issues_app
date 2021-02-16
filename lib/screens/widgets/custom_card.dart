@@ -19,9 +19,9 @@ class CustomCard extends StatelessWidget {
       ),
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 12.0),
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
         width: MediaQuery.of(context).size.width,
-        height: 200.0,
+        height: 210.0,
         color: Theme.of(context).scaffoldBackgroundColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -138,7 +138,7 @@ class CustomCard extends StatelessWidget {
                   ],
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

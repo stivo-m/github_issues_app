@@ -31,6 +31,20 @@ class SettingsScreen extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          width: MediaQuery.of(context).size.width,
+          height: 100,
+          child: Row(
+            children: [
+              IconButton(
+                icon: Icon(Icons.arrow_back_ios),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+              Text("Back"),
+            ],
+          ),
+        ),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
