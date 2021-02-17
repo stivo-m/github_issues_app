@@ -2,7 +2,8 @@
 
 A simple mobile applicaiton made with [Flutter Framework](https://flutter.dev/) to help you track issues on your github repositories. The app is available on Google Playstore and is currently in _Version: 1.0.0+1_.
 
----
+--- 
+
 
 ### Inspiration
 
