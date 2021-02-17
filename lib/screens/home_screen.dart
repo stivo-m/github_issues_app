@@ -65,16 +65,27 @@ class HomeScreen extends StatelessWidget {
                     centerTitle: false,
                     actions: [
                       IconButton(
+                        icon: Icon(Icons.search),
+                        onPressed: () {
+                          showSearch(
+                            context: context,
+                            delegate: SearchWidget(
+                              store: store,
+                            ),
+                          );
+                        },
+                      ),
+                      IconButton(
                         icon: Icon(Icons.settings),
                         onPressed: () {
                           Navigator.of(context).pushNamed(
                             SETTINGS_SCREEN_ROUTE,
                           );
                         },
-                      )
+                      ),
                     ],
-                    expandedHeight: 200.0,
-                    collapsedHeight: 200.0,
+                    expandedHeight: 150.0,
+                    collapsedHeight: 150.0,
                     flexibleSpace: _flexibleSpace(store),
                   ),
                   SliverList(
@@ -91,58 +102,56 @@ class HomeScreen extends StatelessWidget {
 
   Widget _flexibleSpace(Store<AppState> store) {
     return Container(
-      height: 180.0,
+      height: 150.0,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // search widget
-          SearchWidget(
-            store: store,
-          ),
-
           SizedBox(
-            height: 20.0,
+            height: 10.0,
           ),
 
           // bottom row
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              DropdownButton(
-                onChanged: (selected) {
-                  store.dispatch(SortBy(field: selected));
-                  print("Current sort " + store.state.searchState.sortBy);
-                },
-                value: store.state.searchState.sortBy,
-                items: [
-                  DropdownMenuItem(
-                    value: "null",
-                    onTap: () {},
-                    child: Text("Filter by"),
-                  ),
-                  DropdownMenuItem(
-                    value: ID,
-                    child: Text(ID.toString()),
-                  ),
-                  DropdownMenuItem(
-                    value: TITLE_ID,
-                    child: Text(TITLE_ID.toString()),
-                  ),
-                  DropdownMenuItem(
-                    value: DATE_ID,
-                    child: Text(DATE_ID.toString()),
-                  ),
-                  DropdownMenuItem(
-                    value: REPO_ID,
-                    child: Text(REPO_ID.toString()),
-                  ),
-                ],
-              ),
-              Text(IOS_TEXT),
-              Text(ANDROID_TEXT),
-            ],
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20.0,
+              vertical: 10.0,
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                DropdownButton(
+                  onChanged: (selected) {
+                    store.dispatch(SortBy(field: selected));
+                  },
+                  value: store.state.searchState.sortBy,
+                  items: [
+                    DropdownMenuItem(
+                      value: "null",
+                      onTap: () {},
+                      child: Text("Filter by"),
+                    ),
+                    DropdownMenuItem(
+                      value: ID,
+                      child: Text(ID.toString()),
+                    ),
+                    DropdownMenuItem(
+                      value: TITLE_ID,
+                      child: Text(TITLE_ID.toString()),
+                    ),
+                    DropdownMenuItem(
+                      value: DATE_ID,
+                      child: Text(DATE_ID.toString()),
+                    ),
+                    DropdownMenuItem(
+                      value: REPO_ID,
+                      child: Text(REPO_ID.toString()),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -187,12 +196,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-          );
-        }
-
-        if (store.state.searchState.searching) {
-          return SearchResultsWidget(
-            foundIssues: store.state.searchState.issues,
           );
         }
 
