@@ -37,62 +37,60 @@ class HomeScreen extends StatelessWidget {
           false;
     }
 
-    return SafeArea(
-      child: Material(
-        child: WillPopScope(
-          onWillPop: _onWillPop,
-          child: StoreBuilder<AppState>(
-            onInit: (store) => store.dispatch(GetIssues()),
-            builder: (BuildContext context, Store<AppState> store) =>
-                RefreshIndicator(
-              onRefresh: () => store.dispatch(GetIssues()),
-              child: CustomScrollView(
-                slivers: [
-                  SliverAppBar(
-                    pinned: true,
-                    floating: false,
-                    automaticallyImplyLeading: false,
-                    title: Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Text(
-                        APP_TITLE,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 30,
-                        ),
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: StoreBuilder<AppState>(
+        onInit: (store) => store.dispatch(GetIssues()),
+        builder: (BuildContext context, Store<AppState> store) =>
+            RefreshIndicator(
+          onRefresh: () => store.dispatch(GetIssues()),
+          child: Material(
+            child: CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  pinned: true,
+                  floating: false,
+                  automaticallyImplyLeading: false,
+                  title: Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Text(
+                      APP_TITLE,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 30,
                       ),
                     ),
-                    centerTitle: false,
-                    actions: [
-                      IconButton(
-                        icon: Icon(Icons.search),
-                        onPressed: () {
-                          showSearch(
-                            context: context,
-                            delegate: SearchWidget(
-                              store: store,
-                            ),
-                          );
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.settings),
-                        onPressed: () {
-                          Navigator.of(context).pushNamed(
-                            SETTINGS_SCREEN_ROUTE,
-                          );
-                        },
-                      ),
-                    ],
-                    expandedHeight: 150.0,
-                    collapsedHeight: 150.0,
-                    flexibleSpace: _flexibleSpace(store),
                   ),
-                  SliverList(
-                    delegate: _sliverListDelegate(context, store),
-                  ),
-                ],
-              ),
+                  centerTitle: false,
+                  actions: [
+                    IconButton(
+                      icon: Icon(Icons.search),
+                      onPressed: () {
+                        showSearch(
+                          context: context,
+                          delegate: SearchWidget(
+                            store: store,
+                          ),
+                        );
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.settings),
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(
+                          SETTINGS_SCREEN_ROUTE,
+                        );
+                      },
+                    ),
+                  ],
+                  expandedHeight: 150.0,
+                  collapsedHeight: 150.0,
+                  flexibleSpace: _flexibleSpace(store),
+                ),
+                SliverList(
+                  delegate: _sliverListDelegate(context, store),
+                ),
+              ],
             ),
           ),
         ),

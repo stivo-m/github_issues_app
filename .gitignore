@@ -46,3 +46,4 @@ app.*.map.json
 # secret keys
 
 lib/constants/secret_keys.dart
+lib/constants/secret_keys.dart
