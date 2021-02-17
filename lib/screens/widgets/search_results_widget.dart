@@ -14,7 +14,7 @@ class SearchResultsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height - 200,
+      height: MediaQuery.of(context).size.height - 150,
       child: ListView.builder(
         itemCount: foundIssues.length,
         itemBuilder: (context, index) {
@@ -33,6 +33,10 @@ class SearchResultsWidget extends StatelessWidget {
             child: Material(
               elevation: 4,
               child: ListTile(
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: 10.0,
+                  horizontal: 20.0,
+                ),
                 onTap: () => Navigator.of(context).pushNamed(
                   DETAILS_SCREEN_ROUTE,
                   arguments: issue,
@@ -43,7 +47,7 @@ class SearchResultsWidget extends StatelessWidget {
                         ? CLOSED_TEXT.toUpperCase()
                         : OPEN_TEXT.toUpperCase(),
                     style: TextStyle(
-                      color: issue.closed ? Colors.black : Colors.white,
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
                     ),
@@ -54,7 +58,7 @@ class SearchResultsWidget extends StatelessWidget {
                 ),
                 title: Text(issue.title),
                 subtitle: Text(
-                  issue.title,
+                  issue.body,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),

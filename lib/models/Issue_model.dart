@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'comments_model.dart';
 
 class Issue {
-  final String title, body, user, id, closedAt, createdAt;
+  final String title, body, user, id, closedAt, createdAt, repo;
   final List<Comment> comments;
   final bool closed;
 
@@ -14,11 +14,13 @@ class Issue {
     @required this.closedAt,
     @required this.createdAt,
     @required this.closed,
+    @required this.repo,
     this.comments,
   });
 
   Issue.fromJson(Map<String, dynamic> map, List<dynamic> commentsJson)
       : this.title = map['title'],
+        this.repo = map['repository']["name"],
         this.body = map['body'],
         this.user = map['author']['login'],
         this.id = map['databaseId'].toString(),

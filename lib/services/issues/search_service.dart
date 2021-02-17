@@ -7,7 +7,9 @@ class SearchService {
 
     // searching logic here
     for (int i = 0; i < issues.length; i++) {
-      if (issues[i].title.toLowerCase().contains((searchTerm.toLowerCase()))) {
+      if (issues[i].title.toLowerCase().contains((searchTerm.toLowerCase())) ||
+          issues[i].repo.toLowerCase().contains((searchTerm.toLowerCase())) ||
+          issues[i].body.toLowerCase().contains((searchTerm.toLowerCase()))) {
         foundIssues.add(issues[i]);
       }
     }
@@ -24,6 +26,9 @@ class SearchService {
         break;
       case ID:
         return issues.sortBy((issue) => issue.id);
+        break;
+      case REPO_ID:
+        return issues.sortBy((issue) => issue.repo);
         break;
 
       default:
