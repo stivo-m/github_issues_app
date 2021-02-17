@@ -13,7 +13,7 @@ SearchState searchReducer(SearchState state, action) {
   if (action is SearchResults) {
     SearchState newState = state.copyWith(
       issues: action.results,
-      searching: true,
+      searching: false,
     );
     return newState;
   }
@@ -28,7 +28,7 @@ SearchState searchReducer(SearchState state, action) {
 
   if (action is SearchClosed) {
     SearchState newState = state.copyWith(
-      issues: state.issues,
+      issues: action.results,
       searching: false,
     );
     return newState;

@@ -46,7 +46,11 @@ class DetailsScreen extends StatelessWidget {
               actions: [
                 IconButton(
                   icon: Icon(Icons.settings),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(
+                      SETTINGS_SCREEN_ROUTE,
+                    );
+                  },
                 )
               ],
               expandedHeight: 110.0,
@@ -156,59 +160,74 @@ class DetailsScreen extends StatelessWidget {
           SizedBox(
             height: 10.0,
           ),
-          Hero(
-            tag: issue.comments.hashCode,
-            child: Material(
-              color: Colors.transparent,
-              child: Chip(
-                label: Text(
-                  issue.closed
-                      ? CLOSED_TEXT.toUpperCase()
-                      : OPEN_TEXT.toUpperCase(),
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width - 170,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Hero(
+                      tag: issue.title.hashCode,
+                      child: Material(
+                        color: Colors.transparent,
+                        child: Text(
+                          issue.title,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Hero(
+                      tag: issue.repo.hashCode,
+                      child: Material(
+                        color: Colors.transparent,
+                        child: Text(
+                          "Repo: " + issue.repo,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Hero(
+                tag: issue.comments.hashCode,
+                child: Material(
+                  color: Colors.transparent,
+                  child: Chip(
+                    label: Text(
+                      issue.closed
+                          ? CLOSED_TEXT.toUpperCase()
+                          : OPEN_TEXT.toUpperCase(),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
+                    ),
+                    backgroundColor: issue.closed
+                        ? Colors.greenAccent[400]
+                        : Colors.orange[800],
                   ),
                 ),
-                backgroundColor:
-                    issue.closed ? Colors.greenAccent[400] : Colors.orange[800],
               ),
-            ),
+            ],
           ),
           SizedBox(
             height: 5.0,
-          ),
-          Hero(
-            tag: issue.title.hashCode,
-            child: Material(
-              color: Colors.transparent,
-              child: Text(
-                issue.title,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 5.0,
-          ),
-          Hero(
-            tag: issue.repo.hashCode,
-            child: Material(
-              color: Colors.transparent,
-              child: Text(
-                "Repo: " + issue.repo,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 12,
-                ),
-              ),
-            ),
           ),
           SizedBox(
             height: 20.0,

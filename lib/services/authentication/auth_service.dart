@@ -11,9 +11,11 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  final auth.FirebaseAuth _firebaseAuth = auth.FirebaseAuth.instance;
+  final auth.FirebaseAuth _firebaseAuth;
   static StreamSubscription _subs;
   final Dio _dio = Dio();
+
+  AuthService(this._firebaseAuth);
 
   auth.User get user => _firebaseAuth.currentUser;
 
@@ -105,4 +107,4 @@ class AuthService {
   }
 }
 
-AuthService authService = AuthService();
+AuthService authService = AuthService(auth.FirebaseAuth.instance);

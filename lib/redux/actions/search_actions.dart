@@ -17,10 +17,13 @@ class SearchNotFound {
   SearchNotFound({this.notFound = NO_ISSUES_FOUND});
 }
 
-class SearchClosed {}
+class SearchClosed {
+  final List<Issue> results;
+
+  SearchClosed(this.results);
+}
 
 class SortBy {
   final String field;
-
   SortBy({this.field});
 }
