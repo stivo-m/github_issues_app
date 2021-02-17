@@ -40,7 +40,7 @@ You need to configure various keys for the app to function properly. Navigate to
 
 You can find these keys from both [Github's oAuth Apps](https://github.com/settings/developers) and [Firebase Console](https://console.firebase.google.com/) websites for your app
 
-```
+```dart
 const GITHUB_CLIENT_ID = "your-client-id";
 const GITHUB_CLIENT_SECRET = "your-client-secret";
 const FIREBASE_API_KEY = "firebase-api-key";
