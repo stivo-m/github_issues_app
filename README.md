@@ -87,6 +87,10 @@ github_issues_app/
         |-navigation
     |- services
     |- main.dart
+|- test
+    |-mocks
+    |-unit
+    |-widget_test.dart
 |- .gitignore
 |- pubspec.lock
 |- pubspec.yaml
