@@ -1,16 +1,99 @@
-# github_issues_app
+# Github Issues Tracker App
 
-A new Flutter project.
+A simple mobile applicaiton made with [Flutter Framework](https://flutter.dev/) to help you track issues on your github repositories. The app is available on Google Playstore and is currently in _Version: 1.0.0+1_.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+### Inspiration
 
-A few resources to get you started if this is your first Flutter project:
+The Girhub Issues Tracker App was inspired by the need to keep track of all issues on my personal repository. Initially, before GitHub published their native mobile application, it was tiresome to keep logging into the browser to keep track of all issues.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Geting Started
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+##### Step 1
+
+```Bash
+git clone https://github.com/stivo-m/github_issues_app.git
+```
+
+##### Step 2
+
+```Bash
+cd github_issues_app
+```
+
+##### Step 3
+
+```Bash
+flutter pub get
+```
+
+##### Step 4
+
+Before running this step, ensure you have your emulator/simulator running
+
+```Bash
+flutter run
+```
+
+---
+
+### File Structure
+
+```
+github_issues_app/
+|- android
+|- assets
+|- build
+|- ios
+|- lib/
+    |- constants
+    |- graphql
+    |- models
+    |- redux/
+        |- actions
+        |- middleware
+        |- reducers
+        |- state
+    |- routes
+    |- screens/
+        |-authentication
+        |-issues
+        |-navigation
+    |- services
+    |- main.dart
+|- .gitignore
+|- pubspec.lock
+|- pubspec.yaml
+|- README.md
+```
+
+### Technologies and packages
+
+The Girhub Issues Tracker App employs various technologies and packages, including:
+
+- [Flutter Framework with Dart](https://flutter.dev/)
+- firebase_core: ^0.7.0
+- firebase_auth: ^0.20.0+1
+- url_launcher: ^5.7.10
+- uni_links: ^0.4.0
+- redux: ^4.0.0+3
+- flutter_redux: ^0.7.0
+- dio: ^3.0.10
+- gql_dio_link: ^0.0.4
+- shared_preferences: ^0.5.12+4
+- time_ago_provider: ^3.2.0
+
+### Contributing
+
+You can contribute to this project by submitting a pull request to [Pull Request Here](https://github.com/stivo-m/github_issues_app/pulls) with a descriptive title and message.
+
+### License
+
+Copyright &copy; 2021, Steven Maina
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
