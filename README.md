@@ -30,6 +30,31 @@ flutter pub get
 
 ##### Step 4
 
+You need to configure various keys for the app to function properly. Navigate to the _Lib > constants > secret_keys.dart_ as below.
+
+```
+|- lib/
+    |- constants/
+        |- secret_keys.dart
+```
+
+You can find these keys from both [Github's oAuth Apps](https://github.com/settings/developers) and [Firebase Console](https://console.firebase.google.com/) websites for your app
+
+```
+const GITHUB_CLIENT_ID = "your-client-id";
+const GITHUB_CLIENT_SECRET = "your-client-secret";
+const FIREBASE_API_KEY = "firebase-api-key";
+const FIREBASE_APP_ID = "firebase-app-id";
+const FIREBASE_MESSAGING_SENDER_ID = "firebase-messaging-sender-id";
+const FIREBASE_PROJECT_ID = "firebase-project-id";
+const AUTH_DOMAIN =
+    "https://[your-firebase-project-id-here].firebaseapp.com/__/auth/handler";
+```
+
+You can copy the above configurations into the _Lib > constants > secret_keys.dart_ and update them with your keys.
+
+##### Step 5
+
 Before running this step, ensure you have your emulator/simulator running
 
 ```Bash
