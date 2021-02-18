@@ -37,14 +37,14 @@ class HomeScreen extends StatelessWidget {
           false;
     }
 
-    return WillPopScope(
-      onWillPop: _onWillPop,
-      child: StoreBuilder<AppState>(
-        onInit: (store) => store.dispatch(GetIssues()),
-        builder: (BuildContext context, Store<AppState> store) =>
-            RefreshIndicator(
-          onRefresh: () => store.dispatch(GetIssues()),
-          child: Material(
+    return Material(
+      child: WillPopScope(
+        onWillPop: _onWillPop,
+        child: StoreBuilder<AppState>(
+          onInit: (store) => store.dispatch(GetIssues()),
+          builder: (BuildContext context, Store<AppState> store) =>
+              RefreshIndicator(
+            onRefresh: () => store.dispatch(GetIssues()),
             child: CustomScrollView(
               slivers: [
                 SliverAppBar(
