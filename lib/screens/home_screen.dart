@@ -83,8 +83,8 @@ class HomeScreen extends StatelessWidget {
                       },
                     ),
                   ],
-                  expandedHeight: 150.0,
-                  collapsedHeight: 150.0,
+                  expandedHeight: 100.0,
+                  collapsedHeight: 100.0,
                   flexibleSpace: _flexibleSpace(store),
                 ),
                 SliverList(
@@ -100,13 +100,13 @@ class HomeScreen extends StatelessWidget {
 
   Widget _flexibleSpace(Store<AppState> store) {
     return Container(
-      height: 150.0,
+      height: 130.0,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            height: 10.0,
+            height: 5.0,
           ),
 
           // bottom row
@@ -120,6 +120,7 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 DropdownButton(
+                  underline: SizedBox.shrink(),
                   onChanged: (selected) {
                     store.dispatch(SortBy(field: selected));
                   },

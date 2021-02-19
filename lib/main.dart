@@ -46,7 +46,11 @@ class _MyAppState extends State<MyApp> {
     );
 
     issuesService.init();
-    store.dispatch(GetIssues());
+
+    if (!store.state.userState.isLoading &&
+        store.state.userState.user != null) {
+      store.dispatch(GetIssues());
+    }
 
     return StoreProvider(
       store: store,

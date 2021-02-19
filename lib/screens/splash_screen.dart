@@ -80,11 +80,18 @@ class SplashScreen extends StatelessWidget {
             duration: Duration(seconds: 2),
             child: store.state.userState.isLoading
                 ? CircularProgressIndicator()
-                : MaterialButton(
-                    color: Colors.grey[200],
+                : OutlineButton(
+                    highlightedBorderColor: Colors.grey,
+                    borderSide: BorderSide(
+                      color: Colors.grey[400],
+                    ),
+                    highlightElevation: 5,
                     onPressed: () => store.dispatch(UserLoginAction()),
                     child: Padding(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 15,
+                        vertical: 20,
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,

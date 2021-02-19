@@ -41,7 +41,9 @@ class IssuesService {
           issues.add(Issue.fromJson(iss, comments));
         });
       });
-    } catch (e) {}
+    } catch (e) {
+      _prefs.remove(TOKEN_TEXT);
+    }
     return issues;
   }
 }
