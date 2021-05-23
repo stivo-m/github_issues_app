@@ -1,0 +1,40 @@
+name: Flutter CI
+
+# This workflow is triggered on pushes to the repository.
+
+on:
+  push:
+    branches: ["main"]
+
+# on: push    # Default will running for every branch.
+
+jobs:
+  build:
+    # This job will run on ubuntu virtual machine
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      # Setup the flutter environment.
+      - uses: subosito/flutter-action@v1.5.0
+        with:
+          channel: "beta" # 'dev', 'alpha', default to: 'stable'
+          # flutter-version: '1.12.x' # you can also specify exact version of flutter
+
+      # Get flutter dependencies.
+      - run: flutter pub get
+
+      # Check for any formatting issues in the code.
+      #       - run: flutter format --set-exit-if-changed .
+
+      # Statically analyze the Dart code for any errors.
+      - run: flutter analyze .
+
+      # Run widget tests for our flutter project. up
+      - run: flutter test
+      
+      - uses: romeovs/lcov-reporter-action@v0.2.16
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          lcov-file: ./coverage/lcov.info
+
