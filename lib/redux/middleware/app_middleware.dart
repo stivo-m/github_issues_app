@@ -26,9 +26,9 @@ List<Middleware<AppState>> appMiddleWare() {
     TypedMiddleware<AppState, UserCheckAuth>(user),
 
     // issues middleware
-    TypedMiddleware<AppState, GetIssues>(issues),
+    TypedMiddleware<AppState, GetIssues>(issues) ,
     // issues middleware
     TypedMiddleware<AppState, SearchTerm>(search),
-    TypedMiddleware<AppState, SortBy>(sortIssues),
+    TypedMiddleware<AppState, SortBy>(sortIssues) ,
   ];
 }

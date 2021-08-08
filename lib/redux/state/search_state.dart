@@ -1,14 +1,13 @@
-import 'package:flutter/material.dart';
 import 'package:github_issues_app/models/models.dart';
 
 class SearchState {
   final bool searching;
   final List<Issue> issues;
-  final String sortBy;
+  final String? sortBy;
 
   SearchState({
-    @required this.searching,
-    @required this.issues,
+    required this.searching,
+    required this.issues,
     this.sortBy,
   });
 
@@ -18,9 +17,9 @@ class SearchState {
         this.sortBy = "null";
 
   SearchState copyWith({
-    @required searching,
-    @required issues,
-    String sortBy,
+    required searching,
+    required issues,
+    String? sortBy,
   }) {
     return SearchState(
       issues: issues ?? this.issues,

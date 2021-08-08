@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 class User {
-  final String name, email, photoUrl;
+  final String? name, email, photoUrl;
 
   User({
-    @required this.name,
-    @required this.email,
+    required this.name,
+    required this.email,
     this.photoUrl,
   });
 

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -10,17 +12,17 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<bool> _onWillPop() async {
-      return (await showDialog(
+      return (await (showDialog(
             context: context,
             builder: (context) => AlertDialog(
               title: new Text('Are you sure?'),
               content: new Text('Do you want to exit an App'),
               actions: <Widget>[
-                new FlatButton(
+                new TextButton(
                   onPressed: () => Navigator.of(context).pop(false),
                   child: new Text('No'),
                 ),
-                new FlatButton(
+                new TextButton(
                   onPressed: () {
                     Future.delayed(const Duration(milliseconds: 1000), () {
                       SystemChannels.platform
@@ -31,7 +33,7 @@ class SplashScreen extends StatelessWidget {
                 ),
               ],
             ),
-          )) ??
+          ) as FutureOr<bool>?)) ??
           false;
     }
 
@@ -78,7 +80,7 @@ class SplashScreen extends StatelessWidget {
           ),
           AnimatedContainer(
             duration: Duration(seconds: 2),
-            child: store.state.userState.isLoading
+            child: store.state.userState!.isLoading
                 ? CircularProgressIndicator()
                 : MaterialButton(
                     color: Colors.grey[200],

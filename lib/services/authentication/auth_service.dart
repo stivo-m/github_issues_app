@@ -12,16 +12,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
   final auth.FirebaseAuth _firebaseAuth;
-  static StreamSubscription _subs;
+  static StreamSubscription? _subs;
   final Dio _dio = Dio();
 
   AuthService(this._firebaseAuth);
 
-  auth.User get user => _firebaseAuth.currentUser;
+  auth.User? get user => _firebaseAuth.currentUser;
 
-  Stream<auth.User> get authChanges => _firebaseAuth.authStateChanges();
+  Stream<auth.User?> get authChanges => _firebaseAuth.authStateChanges();
 
-  Future<auth.User> loginWithGitHub(String code) async {
+  Future<auth.User?> loginWithGitHub(String code) async {
     //ACCESS TOKEN REQUEST
     final response = await _dio.post(
       SecretKey.ACCESS_TOKEN_LINK,
@@ -44,13 +44,12 @@ class AuthService {
         GitHubLoginResponse.fromJson(response.data);
     //FIREBASE SIGNIN
     final auth.AuthCredential credential =
-        auth.GithubAuthProvider.credential(loginResponse.accessToken);
+        auth.GithubAuthProvider.credential(loginResponse.accessToken!);
 
-    // TODO: Save the access token from loginResponse.accessToken to _dio's shared preferences
     final SharedPreferences _prefs = await SharedPreferences.getInstance();
     _prefs.setString(TOKEN_TEXT, 'Bearer ${loginResponse.accessToken}');
 
-    final auth.User user =
+    final auth.User? user =
         (await _firebaseAuth.signInWithCredential(credential)).user;
     navigatorService.navigateTo(HOME_SCREEN_ROUTE);
     return user;
@@ -75,11 +74,11 @@ class AuthService {
   }
 
   // deep link listener services
-  static Future<auth.User> initDeepLinkListener() async {
+  static Future<auth.User?> initDeepLinkListener() async {
     _userLogin();
-    auth.User currentUser;
-    _subs = getLinksStream().listen((String link) {
-      _checkDeepLink(link).then((auth.User user) {
+    auth.User? currentUser;
+    _subs = linkStream.listen((String? link) {
+      _checkDeepLink(link).then((auth.User? user) {
         currentUser = user;
       });
     }, cancelOnError: true);
@@ -87,8 +86,8 @@ class AuthService {
     return currentUser;
   }
 
-  static Future<auth.User> _checkDeepLink(String link) async {
-    auth.User user;
+  static Future<auth.User?> _checkDeepLink(String? link) async {
+    auth.User? user;
     if (link != null) {
       String code = link.substring(link.indexOf(RegExp('code=')) + 5);
       await authService.loginWithGitHub(code).then((firebaseUser) {
@@ -100,10 +99,8 @@ class AuthService {
   }
 
   static void disposeDeepLinkListener() {
-    if (_subs != null) {
-      _subs.cancel();
-      _subs = null;
-    }
+    _subs?.cancel();
+    
   }
 }
 

@@ -1,7 +1,7 @@
 class GitHubLoginResponse {
-  String accessToken;
-  String tokenType;
-  String scope;
+  String? accessToken;
+  String? tokenType;
+  String? scope;
   GitHubLoginResponse({this.accessToken, this.tokenType, this.scope});
 
   GitHubLoginResponse.fromJson(Map<String, dynamic> json)
@@ -11,9 +11,9 @@ class GitHubLoginResponse {
 }
 
 class GitHubLoginRequest {
-  String clientId;
-  String clientSecret;
-  String code;
+  String? clientId;
+  String? clientSecret;
+  String? code;
   GitHubLoginRequest({this.clientId, this.clientSecret, this.code});
   dynamic toJson() => {
         "client_id": clientId,

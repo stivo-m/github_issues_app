@@ -9,8 +9,8 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 Middleware<AppState> loginUser() {
   return (Store store, action, NextDispatcher next) async {
-    AuthService.initDeepLinkListener().then((auth.User user) {
-      store.dispatch(UserLoginSuccess(User.fromFirebase(user)));
+    AuthService.initDeepLinkListener().then((auth.User? user) {
+      store.dispatch(UserLoginSuccess(User.fromFirebase(user!)));
     }).catchError(
       (e) => store.dispatch(UserLoginError()),
     );

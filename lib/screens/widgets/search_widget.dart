@@ -8,7 +8,7 @@ import 'package:redux/redux.dart';
 class SearchWidget extends SearchDelegate {
   final Store<AppState> store;
   SearchWidget({
-    @required this.store,
+    required this.store,
   });
 
   @override
@@ -39,7 +39,7 @@ class SearchWidget extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     store.dispatch(SearchTerm(term: query));
 
-    if (store.state.searchState.issues.length == 0) {
+    if (store.state.searchState!.issues.length == 0) {
       return Center(
         child: Text(NO_ISSUES_FOUND),
       );
@@ -50,15 +50,14 @@ class SearchWidget extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // TODO: implement buildSuggestions
     return Container();
   }
 
   Widget _searchResults() {
     return ListView.builder(
-      itemCount: store.state.searchState.issues.length,
+      itemCount: store.state.searchState!.issues.length,
       itemBuilder: (context, index) {
-        Issue issue = store.state.searchState.issues[index];
+        Issue issue = store.state.searchState!.issues[index];
         return Container(
           margin: EdgeInsets.symmetric(
             vertical: 5,
@@ -76,7 +75,7 @@ class SearchWidget extends SearchDelegate {
               ),
               leading: Chip(
                 label: Text(
-                  issue.closed
+                  issue.closed!
                       ? CLOSED_TEXT.toUpperCase()
                       : OPEN_TEXT.toUpperCase(),
                   style: TextStyle(
@@ -85,12 +84,13 @@ class SearchWidget extends SearchDelegate {
                     fontSize: 12,
                   ),
                 ),
-                backgroundColor:
-                    issue.closed ? Colors.greenAccent[400] : Colors.orange[800],
+                backgroundColor: issue.closed!
+                    ? Colors.greenAccent[400]
+                    : Colors.orange[800],
               ),
-              title: Text(issue.title),
+              title: Text(issue.title!),
               subtitle: Text(
-                issue.body,
+                issue.body!,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),

@@ -1,20 +1,19 @@
-import 'package:flutter/material.dart';
 import 'comments_model.dart';
 
 class Issue {
-  final String title, body, user, id, closedAt, createdAt, repo;
-  final List<Comment> comments;
-  final bool closed;
+  final String? title, body, user, id, closedAt, createdAt, repo;
+  final List<Comment>? comments;
+  final bool? closed;
 
   Issue({
-    @required this.title,
-    @required this.body,
-    @required this.user,
-    @required this.id,
-    @required this.closedAt,
-    @required this.createdAt,
-    @required this.closed,
-    @required this.repo,
+    required this.title,
+    required this.body,
+    required this.user,
+    required this.id,
+    required this.closedAt,
+    required this.createdAt,
+    required this.closed,
+    required this.repo,
     this.comments,
   });
 
@@ -31,11 +30,11 @@ class Issue {
 }
 
 extension IterableExtensions<T> on Iterable<T> {
-  Iterable<T> sortBy<TSelected extends Comparable<TSelected>>(
-          TSelected Function(T) selector) =>
+  Iterable<T> sortBy<TSelected extends Comparable<TSelected?>>(
+          TSelected? Function(T) selector) =>
       toList()
         ..sort(
-          (a, b) => selector(a).compareTo(
+          (a, b) => selector(a)!.compareTo(
             selector(b),
           ),
         );

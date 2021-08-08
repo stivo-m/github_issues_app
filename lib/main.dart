@@ -70,8 +70,8 @@ class _MyAppState extends State<MyApp> {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         onGenerateRoute: AppRouter.generateRoute,
-        initialRoute: !store.state.userState.isLoading &&
-                store.state.userState.user != null
+        initialRoute: !store.state.userState!.isLoading &&
+                store.state.userState!.user != null
             ? HOME_SCREEN_ROUTE
             : SPLASH_SCREEN_ROUTE,
       ),
