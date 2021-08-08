@@ -1,13 +1,12 @@
-import 'package:flutter/material.dart';
 
 class Comment {
-  final String createdAt, user;
-  final String comment;
+  final String? createdAt, user;
+  final String? comment;
 
   Comment({
-    @required this.createdAt,
-    @required this.user,
-    @required this.comment,
+    required this.createdAt,
+    required this.user,
+    required this.comment,
   });
 
   Comment.fromJson(json)

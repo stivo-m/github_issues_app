@@ -1,24 +1,20 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:github_issues_app/constants/constants.dart';
 import 'package:github_issues_app/main.dart';
 import 'mocks/firebase_mocks.dart';
-import 'package:github_issues_app/redux/app_redux.dart';
-import 'package:github_issues_app/redux/middleware/app_middleware.dart';
-import 'package:redux/redux.dart';
 
 void main() {
   setupFirebaseAuthMocks();
-  Store<AppState> store;
+  // Store<AppState> store;
 
-  setUpAll(() async {
-    await Firebase.initializeApp();
-    store = Store<AppState>(
-      appStateReducer,
-      initialState: AppState.initialState(),
-      middleware: appMiddleWare(),
-    );
-  });
+  // setUpAll(() async {
+  //   await Firebase.initializeApp();
+  //   store = Store<AppState>(
+  //     appStateReducer,
+  //     initialState: AppState.initialState(),
+  //     middleware: appMiddleWare(),
+  //   );
+  // });
 
   group('MainScreen.test', () {
     testWidgets('on startup, check if the signup button exists',

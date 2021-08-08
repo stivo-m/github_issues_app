@@ -10,8 +10,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class IssuesService {
   dio.Dio client = dio.Dio();
-  SharedPreferences _prefs;
-  Link _link;
+  late SharedPreferences _prefs;
+  late Link _link;
 
   Future init() async {
     _prefs = await SharedPreferences.getInstance();
@@ -19,7 +19,7 @@ class IssuesService {
       API_ENDPOINT,
       client: client,
       defaultHeaders: {
-        API_AUTHORIZATION_TEXT: _prefs.getString(TOKEN_TEXT),
+        API_AUTHORIZATION_TEXT: _prefs.getString(TOKEN_TEXT)!,
       },
     );
   }
@@ -35,7 +35,7 @@ class IssuesService {
           ))
           .toList();
       res.forEach((d) {
-        var data = d.data["viewer"]["issues"]["nodes"] as List;
+        var data = d.data!["viewer"]["issues"]["nodes"] as List;
         data.forEach((iss) {
           var comments = iss["comments"]["nodes"] as List;
           issues.add(Issue.fromJson(iss, comments));

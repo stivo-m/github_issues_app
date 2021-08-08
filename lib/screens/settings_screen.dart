@@ -53,7 +53,7 @@ class SettingsScreen extends StatelessWidget {
           children: [
             CircleAvatar(
               backgroundImage:
-                  NetworkImage(store.state.userState.user.photoUrl ?? ""),
+                  NetworkImage(store.state.userState!.user!.photoUrl ?? ""),
               backgroundColor: Colors.white,
               radius: 100.0,
             ),
@@ -61,7 +61,7 @@ class SettingsScreen extends StatelessWidget {
               height: 20.0,
             ),
             Text(
-              store.state.userState.user.name ?? "",
+              store.state.userState!.user!.name ?? "",
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
@@ -71,7 +71,7 @@ class SettingsScreen extends StatelessWidget {
               height: 5.0,
             ),
             Text(
-              store.state.userState.user.email ?? "",
+              store.state.userState!.user!.email ?? "",
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.normal,
@@ -80,7 +80,7 @@ class SettingsScreen extends StatelessWidget {
             SizedBox(
               height: 30.0,
             ),
-            store.state.userState.isLoading
+            store.state.userState!.isLoading
                 ? CircularProgressIndicator()
                 : MaterialButton(
                     color: Colors.redAccent,

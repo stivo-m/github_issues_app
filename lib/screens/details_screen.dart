@@ -5,11 +5,11 @@ import 'package:github_issues_app/models/issue_model.dart';
 import 'package:time_ago_provider/time_ago_provider.dart' as time_ago;
 
 class DetailsScreen extends StatelessWidget {
-  final Issue issue;
+  final Issue? issue;
 
   const DetailsScreen({
-    Key key,
-    @required this.issue,
+    Key? key,
+    required this.issue,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -29,11 +29,11 @@ class DetailsScreen extends StatelessWidget {
                 ],
               ),
               title: Hero(
-                tag: issue.id.hashCode,
+                tag: issue!.id.hashCode,
                 child: Material(
                   color: Colors.transparent,
                   child: Text(
-                    "#" + issue.id,
+                    "#" + issue!.id!,
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -93,7 +93,7 @@ class DetailsScreen extends StatelessWidget {
                       size: 16,
                     ),
                     Text(
-                      issue.user,
+                      issue!.user!,
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w300,
@@ -111,7 +111,7 @@ class DetailsScreen extends StatelessWidget {
                     ),
                     Text(
                       time_ago.format(
-                        DateTime.parse(issue.createdAt),
+                        DateTime.parse(issue!.createdAt!),
                       ),
                       style: TextStyle(
                         color: Colors.black,
@@ -129,7 +129,7 @@ class DetailsScreen extends StatelessWidget {
                       size: 16,
                     ),
                     Text(
-                      issue.comments.length.toString() + " comments",
+                      issue!.comments!.length.toString() + " comments",
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w300,
@@ -170,11 +170,11 @@ class DetailsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Hero(
-                      tag: issue.title.hashCode,
+                      tag: issue!.title.hashCode,
                       child: Material(
                         color: Colors.transparent,
                         child: Text(
-                          issue.title,
+                          issue!.title!,
                           style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -187,11 +187,11 @@ class DetailsScreen extends StatelessWidget {
                       height: 5.0,
                     ),
                     Hero(
-                      tag: issue.repo.hashCode,
+                      tag: issue!.repo.hashCode,
                       child: Material(
                         color: Colors.transparent,
                         child: Text(
-                          "Repo: " + issue.repo,
+                          "Repo: " + issue!.repo!,
                           style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -204,12 +204,12 @@ class DetailsScreen extends StatelessWidget {
                 ),
               ),
               Hero(
-                tag: issue.comments.hashCode,
+                tag: issue!.comments.hashCode,
                 child: Material(
                   color: Colors.transparent,
                   child: Chip(
                     label: Text(
-                      issue.closed
+                      issue!.closed!
                           ? CLOSED_TEXT.toUpperCase()
                           : OPEN_TEXT.toUpperCase(),
                       style: TextStyle(
@@ -218,7 +218,7 @@ class DetailsScreen extends StatelessWidget {
                         fontSize: 12,
                       ),
                     ),
-                    backgroundColor: issue.closed
+                    backgroundColor: issue!.closed!
                         ? Colors.greenAccent[400]
                         : Colors.orange[800],
                   ),
@@ -243,11 +243,11 @@ class DetailsScreen extends StatelessWidget {
             height: 10.0,
           ),
           Hero(
-            tag: issue.body.hashCode,
+            tag: issue!.body.hashCode,
             child: Material(
               color: Colors.transparent,
               child: Text(
-                issue.body,
+                issue!.body!,
               ),
             ),
           ),
@@ -267,28 +267,28 @@ class DetailsScreen extends StatelessWidget {
           Expanded(
             flex: 2,
             child: ListView.builder(
-              itemCount: issue.comments.length,
+              itemCount: issue!.comments!.length,
               itemBuilder: (context, index) {
-                Comment comment = issue.comments[index];
+                Comment comment = issue!.comments![index];
                 return Column(
                   children: [
                     ListTile(
                       // leading: Icon(Icons.comment_rounded),
-                      title: Text(comment.comment),
+                      title: Text(comment.comment!),
                       subtitle: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Posted by " + comment.user,
+                              "Posted by " + comment.user!,
                               style: TextStyle(
                                 fontSize: 12,
                               ),
                             ),
                             Text(
                               time_ago.format(
-                                DateTime.parse(comment.createdAt),
+                                DateTime.parse(comment.createdAt!),
                               ),
                               style: TextStyle(
                                 fontSize: 12,

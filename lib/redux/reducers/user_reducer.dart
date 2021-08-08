@@ -3,22 +3,22 @@ import 'package:github_issues_app/redux/actions/user_actions.dart';
 import 'package:github_issues_app/redux/state/user_state.dart';
 import 'package:github_issues_app/services/authentication/auth_service.dart';
 
-UserState userReducer(UserState state, action) {
+UserState? userReducer(UserState? state, action) {
   if (action is UserCheckAuth) {
-    UserState newState = state.copyWith(
+    UserState newState = state!.copyWith(
         user: authService.user == null
             ? state.user
-            : User.fromFirebase(authService.user),
+            : User.fromFirebase(authService.user!),
         isLoading: false);
     return newState;
   }
 
   if (action is UserLoginAction) {
-    return state.copyWith(user: state.user, isLoading: true);
+    return state!.copyWith(user: state.user, isLoading: true);
   }
 
   if (action is UserLoginSuccess) {
-    UserState newState = state.copyWith(
+    UserState newState = state!.copyWith(
       user: action.user,
       isLoading: false,
     );
@@ -26,7 +26,7 @@ UserState userReducer(UserState state, action) {
   }
 
   if (action is UserLogoutAction) {
-    UserState newState = state.copyWith(
+    UserState newState = state!.copyWith(
       user: state.user,
       isLoading: true,
     );
@@ -34,7 +34,7 @@ UserState userReducer(UserState state, action) {
   }
 
   if (action is UserLogoutSuccess) {
-    UserState newState = state.copyWith(
+    UserState newState = state!.copyWith(
       user: null,
       isLoading: false,
     );

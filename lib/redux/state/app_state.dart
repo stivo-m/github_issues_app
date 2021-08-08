@@ -1,15 +1,14 @@
-import 'package:flutter/material.dart';
 import 'package:github_issues_app/redux/state/issues_state.dart';
 import 'package:github_issues_app/redux/state/search_state.dart';
 import 'package:github_issues_app/redux/state/user_state.dart';
 
 class AppState {
   final IssuesState issuesState;
-  final UserState userState;
-  final SearchState searchState;
+  final UserState? userState;
+  final SearchState? searchState;
 
   AppState({
-    @required this.issuesState,
+    required this.issuesState,
     this.userState,
     this.searchState,
   });

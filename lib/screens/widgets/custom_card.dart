@@ -6,8 +6,8 @@ import 'package:time_ago_provider/time_ago_provider.dart' as time_ago;
 class CustomCard extends StatelessWidget {
   final Issue issue;
   const CustomCard({
-    Key key,
-    @required this.issue,
+    Key? key,
+    required this.issue,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class CustomCard extends StatelessWidget {
                   child: Material(
                     color: Colors.transparent,
                     child: Text(
-                      "#" + issue.id,
+                      "#" + issue.id!,
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -52,7 +52,7 @@ class CustomCard extends StatelessWidget {
                     color: Colors.transparent,
                     child: Chip(
                       label: Text(
-                        issue.closed
+                        issue.closed!
                             ? CLOSED_TEXT.toUpperCase()
                             : OPEN_TEXT.toUpperCase(),
                         style: TextStyle(
@@ -61,7 +61,7 @@ class CustomCard extends StatelessWidget {
                           fontSize: 12,
                         ),
                       ),
-                      backgroundColor: issue.closed
+                      backgroundColor: issue.closed!
                           ? Colors.greenAccent[400]
                           : Colors.orange[800],
                     ),
@@ -77,7 +77,7 @@ class CustomCard extends StatelessWidget {
               child: Material(
                 color: Colors.transparent,
                 child: Text(
-                  issue.title,
+                  issue.title!,
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -94,7 +94,7 @@ class CustomCard extends StatelessWidget {
               child: Material(
                 color: Colors.transparent,
                 child: Text(
-                  "Repo: " + issue.repo,
+                  "Repo: " + issue.repo!,
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -111,7 +111,7 @@ class CustomCard extends StatelessWidget {
               child: Material(
                 color: Colors.transparent,
                 child: Text(
-                  issue.body,
+                  issue.body!,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -132,7 +132,7 @@ class CustomCard extends StatelessWidget {
                       size: 16,
                     ),
                     Text(
-                      issue.user,
+                      issue.user!,
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w300,
@@ -150,7 +150,7 @@ class CustomCard extends StatelessWidget {
                     ),
                     Text(
                       time_ago.format(
-                        DateTime.parse(issue.createdAt),
+                        DateTime.parse(issue.createdAt!),
                       ),
                       style: TextStyle(
                         color: Colors.black,
@@ -171,7 +171,7 @@ class CustomCard extends StatelessWidget {
                       width: 5,
                     ),
                     Text(
-                      issue.comments.length.toString() + " comments",
+                      issue.comments!.length.toString() + " comments",
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w300,

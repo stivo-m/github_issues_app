@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:github_issues_app/constants/constants.dart';
+import 'package:github_issues_app/models/issue_model.dart';
 import 'package:github_issues_app/screens/screens.dart';
 
 class AppRouter {
@@ -12,7 +13,7 @@ class AppRouter {
       case DETAILS_SCREEN_ROUTE:
         return MaterialPageRoute(
             builder: (_) => DetailsScreen(
-                  issue: settings.arguments,
+                  issue: settings.arguments as Issue?,
                 ));
       case SETTINGS_SCREEN_ROUTE:
         return MaterialPageRoute(builder: (_) => SettingsScreen());
